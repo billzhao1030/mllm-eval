@@ -1,0 +1,17 @@
+# Experiment
+experiment:
+  id: "eval"
+  seed: 42
+  eval_first: true
+  use_neptune: true
+  neptune_project: "VLN/VersNav"
+  tags: ["moe_coef_0.8", "TaskMoE-multi", "w/o SCALEVLN", "Attn_q"]
+
+model:
+  moe_position: "Attn_q"
+  pretrained_ckpt: "../data/pretrain/Attnq_pretrained_ckpt.pt"
+  task_routing_feature: "multi"
+
+task:
+  val_source:                  # Source datasets for testing
+    ['R2R', 'REVERIE']
