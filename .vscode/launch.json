@@ -1,0 +1,125 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+        {
+            "name": "Python Debugger: MLLM_Eval_Yaml",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/vln_mllm_eval/main.py",
+            "cwd": "${workspaceFolder}/vln_mllm_eval",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0",
+                "PYTHONPATH": "/root/Matterport3DSimulator/build"
+            },
+            "args": [
+                "--config_dir=configs/experiment.yaml",
+            ],
+            "justMyCode": true
+        },
+        {
+            "name": "Python Debugger: MLLM-Eval",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/vln_mllm_eval/main.py",
+            "args": [
+                "--config_dir=configs/experiment.yaml"
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0",
+                "PYTHONPATH": "/root/Matterport3DSimulator/build"
+            },
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/vln_mllm_eval",
+            "justMyCode": true
+        },
+        {
+            "name": "Python Debugger: Inference HAMT R2R",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/finetune_src/r2r/main.py",
+            "args": [
+                "--root_dir", "datasets",
+                "--output_dir", "datasets/R2R/trained_models/vitbase-finetune",
+                "--dataset", "r2r",
+                "--vlnbert", "${vlnbert}",
+                "--ob_type", "pano",
+                "--world_size", "1",
+                "--seed", "0",
+                "--num_l_layers", "9",
+                "--num_x_layers", "4",
+                "--hist_enc_pano",
+                "--hist_pano_num_layers", "2",
+                "--fix_lang_embedding",
+                "--fix_hist_embedding",
+                "--features", "vitbase",
+                "--feedback", "sample",
+                "--max_action_len", "15",
+                "--max_instr_len", "60",
+                "--image_feat_size", "768",
+                "--angle_feat_size", "4",
+                "--lr", "1e-5",
+                "--iters", "300000",
+                "--log_every", "2000",
+                "--batch_size", "8",
+                "--optim", "adamW",
+                "--ml_weight", "0.2",
+                "--feat_dropout", "0.4",
+                "--dropout", "0.5",
+                "--resume_file", "datasets/R2R/trained_models/vitbase-finetune-e2e/best_val_unseen",
+                "--test",
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0",
+                "PYTHONPATH": "/root/Matterport3DSimulator/build:/data/xunyi/VLN-HAMT/finetune_src"
+            },
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "justMyCode": true
+        },
+        {
+            "name": "Python Debugger: Inference HAMT REVERIE",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/finetune_src/reverie/main_navref.py",
+            "args": [
+                "--root_dir", "datasets",
+                "--output_dir", "datasets/REVERIE/trained_models/",
+                "--dataset", "reverie",
+                "--multi_endpoints",
+                "--ob_type", "pano",
+                "--world_size", "1",
+                "--seed", "0",
+                "--num_l_layers", "9",
+                "--num_x_layers", "4",
+                "--hist_enc_pano",
+                "--hist_pano_num_layers", "2",
+                "--no_lang_ca",
+                "--features", "vitbase_r2rfte2e",
+                "--feedback", "sample",
+                "--max_action_len", "15",
+                "--max_instr_len", "60",
+                "--image_feat_size", "768",
+                "--obj_feat_size", "768",
+                "--angle_feat_size", "4",
+                "--lr", "1e-5",
+                "--iters", "200000",
+                "--log_every", "1000",
+                "--batch_size", "8",
+                "--optim", "adamW",
+                "--ml_weight", "0.2",
+                "--feat_dropout", "0.4",
+                "--dropout", "0.5",
+                "--resume_file", "datasets/REVERIE/trained_models/best_val_unseen",
+                "--test",
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0",
+                "PYTHONPATH": "/root/Matterport3DSimulator/build:/data/xunyi/VLN-HAMT/finetune_src"
+            },
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "justMyCode": true
+        }        
+    ]
+}
