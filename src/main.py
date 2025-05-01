@@ -90,7 +90,7 @@ def main():
     log_config_to_file(config, logger=logger)
     
     # Ramdom seed setting
-    setup_seeds(seed=config.seed)
+    setup_seeds(seed=config.experiment.seed)
 
 
     ############################################################
