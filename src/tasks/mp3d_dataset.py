@@ -36,15 +36,33 @@ class MP3DDataset(BaseDataset):
         self.feat_db = None
 
         # Load MP3D dataset
-        self._load_data(config.experiment.data_dir)
+        msg = self._load_data(config.experiment.data_dir)
+
+        self.buffered_state_dict = {}
+
+        all_graphs = environment['graphs']
+        all_shortest_paths = environment['shortest_path']
+        all_shortest_distances = environment['shortest_distance']
+
+        self.environment = {
+            "graphs": {scan: all_graphs[scan] for scan in self.scans},
+            "shortest_path": {scan: all_shortest_paths[scan] for scan in self.scans},
+            "shortest_distance": {scan: all_shortest_distances[scan] for scan in self.scans},
+            "navigable": environment['navigable'],
+            "location": environment['location']
+        }
+
+        logger.info(f"{task}: {self.__class__.__name__} {split} split loaded")
+        logger.info(msg)
+
 
     def _load_data(self, data_dir):
+        self.data = dict()
+        self.alldata = []
+        msg = ""
+
         # Set file extension
         ext = ".jsonl" if self.task == "RXR_EN" else ".json"
-        file_keys = [
-            "test_enc", "train_enc", "val_seen_enc",
-            "val_train_seen_enc", "val_unseen_enc", "val_unseen_subset_enc"
-        ]
 
         # Create local target folder
         target_folder = os.path.join(data_dir, self.task)
@@ -53,13 +71,22 @@ class MP3DDataset(BaseDataset):
         anno_file = f"{self.split}_enc{ext}"
         local_path = os.path.join(target_folder, anno_file)
 
+        # Download data if not exist in local
         if os.path.exists(local_path):
             self.logger.info(f"Found {anno_file}, skipping download.")
         else:
             self._download_data(anno_file, local_path)
 
-        self.logger.info(f"Loading R2R data from {anno_file}")
+        self.logger.info(f"Loading {self.task} data from {anno_file}")
+
+        self.data[self.task], self.gt_trajs = self.load_data(local_path)
+
+        # Set up scans
+        self.scans = set([x['scan'] for x in self.data[self.task]])
+        msg += f"\n- Dataset: load {len(self.data[self.task])} {self.task} samples"
+        msg += f"\n- Dataset: load {self.split} split: {len(self.scans)} scans in total"
             
+        return msg
 
     def _download_data(self, filename, local_path):
         hub_filename = f"{self.task}/{filename}"

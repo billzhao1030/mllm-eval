@@ -98,8 +98,7 @@ def main():
     ############################################################
     logger.info('********************** Setting up dataloaders **********************')
 
-    # environment = create_environment(logger)
-    environment = {}
+    environment = create_environment(logger)
     logger.info("Finshed building MP3D environment")
 
     dataloaders = create_dataloader(config, logger, environment, device_id)
