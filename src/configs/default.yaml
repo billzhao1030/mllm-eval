@@ -23,6 +23,7 @@ experiment:
   neptune_api_token: null      # Neptune API token
   tags: []                     # Tags for the experiment
   batch_size: 1                # Batch size
+  workers: 1                   # Number of workers
 
 # Agent Configuration
 agent:
@@ -109,8 +110,8 @@ task:
   }
 
   eval_splits: {                # Evaluation splits
-    "R2R": ["val_unseen_subset", "val_unseen"],
-    "REVERIE": ["val_unseen_subset", "val_unseen"],
+    "R2R": ["val_unseen_subset"],
+    "REVERIE": ["val_unseen_subset"],
     "RXR-EN": ["val_unseen_subset", "val_unseen"],
     "CVDN": ["val_unseen_subset", "val_unseen"],
   }

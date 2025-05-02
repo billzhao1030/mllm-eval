@@ -1,7 +1,9 @@
 import os
+import torch
 from logging import Logger
 from omegaconf import DictConfig
 from typing import List, Dict
+from collections import defaultdict
 from .base_dataset import BaseDataset
 from huggingface_hub import hf_hub_download
 
@@ -58,7 +60,6 @@ class MP3DDataset(BaseDataset):
 
     def _load_data(self, data_dir):
         self.data = dict()
-        self.alldata = []
         msg = ""
 
         # Set file extension
@@ -79,11 +80,11 @@ class MP3DDataset(BaseDataset):
 
         self.logger.info(f"Loading {self.task} data from {anno_file}")
 
-        self.data[self.task], self.gt_trajs = self.load_data(local_path)
+        self.data, self.gt_trajs = self.load_data(local_path)
 
         # Set up scans
-        self.scans = set([x['scan'] for x in self.data[self.task]])
-        msg += f"\n- Dataset: load {len(self.data[self.task])} {self.task} samples"
+        self.scans = set([x['scan'] for x in self.data])
+        msg += f"\n- Dataset: load {self.split} split: {len(self.data)} samples in total"
         msg += f"\n- Dataset: load {self.split} split: {len(self.scans)} scans in total"
             
         return msg
@@ -99,4 +100,37 @@ class MP3DDataset(BaseDataset):
         with open(downloaded_path, "rb") as src, open(local_path, "wb") as dst:
             dst.write(src.read())
         self.logger.info(f"Downloaded {hub_filename} -> {local_path}")
+
+    def __len__(self):
+        return len(self.data)
+
+    def init_obs_db(self, obs_db):
+        self.obs_db = obs_db
+
+    @staticmethod
+    def collate_batch(
+        batch_list: List[Dict],
+        _unused: bool = False,
+    ) -> Dict:
+        # batch list is a list of dictionaries from __getitem__
+        data_dict = defaultdict(list)
+
+        # collate the data dictionaries from the batch list into a single dictionary
+        for cur_sample in batch_list:
+            for key, val in cur_sample.items():
+                data_dict[key].append(val)
+        batch_size = len(batch_list)
+        ret = {}
+        for key, val in data_dict.items():
+            try:
+                if key in ['NotImplemented']:
+                    ret[key] = torch.stack(val, 0)
+                else:
+                    ret[key] = val
+            except:
+                print('Error in collate_batch: key=%s' % key)
+                raise TypeError
+
+        ret['batch_size'] = batch_size
+        return ret
             

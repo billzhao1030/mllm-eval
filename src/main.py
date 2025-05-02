@@ -92,7 +92,6 @@ def main():
     # Ramdom seed setting
     setup_seeds(seed=config.experiment.seed)
 
-
     ############################################################
     # Set up data loaders and agents
     ############################################################
@@ -102,6 +101,9 @@ def main():
     logger.info("Finshed building MP3D environment")
 
     dataloaders = create_dataloader(config, logger, environment, device_id)
+    logger.info("Finshed building data loader")
+
+
 
 
 if __name__ == '__main__':
