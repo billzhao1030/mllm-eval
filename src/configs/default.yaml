@@ -110,9 +110,9 @@ task:
 
   eval_splits: {                # Evaluation splits
     "R2R": ["val_unseen_subset", "val_unseen"],
-    "REVERIE": ["val_train_seen", "val_unseen"],
-    "RXR-EN": ["val_unseen"],
-    "CVDN": ["val_unseen"],
+    "REVERIE": ["val_unseen_subset", "val_unseen"],
+    "RXR-EN": ["val_unseen_subset", "val_unseen"],
+    "CVDN": ["val_unseen_subset", "val_unseen"],
   }
 
 # Datasets Configuration
