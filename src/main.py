@@ -100,9 +100,13 @@ def main():
     environment = create_environment(logger)
     logger.info("Finshed building MP3D environment")
 
-    dataloaders = create_val_env(config, logger, environment, device_id)
-    logger.info("Finshed building data loader")
+    val_envs = create_val_env(config, logger, environment, device_id)
+    logger.info("Finshed building data batch env")
 
+    ############################################################
+    # Load agent 
+    ############################################################
+    
 
 
 

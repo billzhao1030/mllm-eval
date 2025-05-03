@@ -2,6 +2,8 @@ import os
 import json
 from PIL import Image
 
+from utils.data import download_mp3d_observations
+
 class ImageObservationDB(object):
     def __init__(self, img_obs_dir, img_obs_sum_dir, map_dir):
         self.image_obs_dir = img_obs_dir
@@ -37,10 +39,12 @@ class ImageObservationDB(object):
 
         return self._obs_store[key]
 
-def create_observation_db(config):
+def create_observation_db(config, logger):
     img_obs_dir = config.environment.obs_dir
     img_obs_sum_dir = config.environment.obs_sum_dir
     map_dir = config.environment.map_dir
+
+    download_mp3d_observations(logger)
 
     return ImageObservationDB(img_obs_dir, img_obs_sum_dir, map_dir)
 

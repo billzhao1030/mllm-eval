@@ -60,8 +60,10 @@ class MP3DDataset(BaseDataset):
         logger.info(msg)
 
         # Set up Simluator
+        self.obs_db = obs_db
+
         env_data = {key: environment[key] for key in ["navigable", "location"]}
-        self.env = EnvBatch(env_data, obs_db, self.batch_size)
+        self.env = EnvBatch(env_data, self.obs_db, self.batch_size)
 
     def _load_data(self, data_dir):
         msg = ""
@@ -109,9 +111,7 @@ class MP3DDataset(BaseDataset):
     def size(self):
         """Returns the total number of instructions."""
         return len(self.data)
-
-    def init_obs_db(self, obs_db):
-        self.obs_db = obs_db
+    
 
     def _next_minibatch(self, batch_size=None, **kwargs):
         """

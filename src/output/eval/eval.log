@@ -2980,3 +2980,162 @@
 - Dataset: load val_unseen_subset split: 519 samples in total
 - Dataset: load val_unseen_subset split: 10 scans in total
 2025-05-02 16:05:54,448 - INFO - Finshed building data loader
+2025-05-03 22:08:20,451 - INFO - ********************** Start logging **********************
+2025-05-03 22:08:20,453 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,453 - INFO - experiment:
+2025-05-03 22:08:20,454 - INFO - cfg.experiment.id                        eval
+2025-05-03 22:08:20,454 - INFO - cfg.experiment.output_dir                output
+2025-05-03 22:08:20,455 - INFO - cfg.experiment.data_dir                  ../data
+2025-05-03 22:08:20,455 - INFO - cfg.experiment.seed                      42
+2025-05-03 22:08:20,456 - INFO - cfg.experiment.max_saved_ckpts           1
+2025-05-03 22:08:20,456 - INFO - cfg.experiment.eval_first                True
+2025-05-03 22:08:20,457 - INFO - cfg.experiment.debug                     False
+2025-05-03 22:08:20,457 - INFO - cfg.experiment.test                      False
+2025-05-03 22:08:20,458 - INFO - cfg.experiment.submit                    False
+2025-05-03 22:08:20,458 - INFO - cfg.experiment.no_backtrack              False
+2025-05-03 22:08:20,459 - INFO - cfg.experiment.detailed_output           False
+2025-05-03 22:08:20,459 - INFO - cfg.experiment.resume_file               None
+2025-05-03 22:08:20,459 - INFO - cfg.experiment.resume_optimizer          True
+2025-05-03 22:08:20,460 - INFO - cfg.experiment.save_latest_states        True
+2025-05-03 22:08:20,460 - INFO - cfg.experiment.use_neptune               True
+2025-05-03 22:08:20,461 - INFO - cfg.experiment.neptune_project           VLN/VersNav
+2025-05-03 22:08:20,462 - INFO - cfg.experiment.neptune_api_token         None
+2025-05-03 22:08:20,463 - INFO - cfg.experiment.tags                      ['moe_coef_0.8', 'TaskMoE-multi', 'w/o SCALEVLN', 'Attn_q']
+2025-05-03 22:08:20,463 - INFO - cfg.experiment.batch_size                1
+2025-05-03 22:08:20,464 - INFO - cfg.experiment.workers                   1
+2025-05-03 22:08:20,465 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,465 - INFO - agent:
+2025-05-03 22:08:20,466 - INFO - cfg.agent.type                           duet
+2025-05-03 22:08:20,466 - INFO - cfg.agent.ignoreid                       -100
+2025-05-03 22:08:20,467 - INFO - cfg.agent.enc_full_graph                 True
+2025-05-03 22:08:20,467 - INFO - cfg.agent.act_visited_nodes              False
+2025-05-03 22:08:20,467 - INFO - cfg.agent.fusion                         dynamic
+2025-05-03 22:08:20,467 - INFO - cfg.agent.expl_sample                    False
+2025-05-03 22:08:20,468 - INFO - cfg.agent.expl_max_ratio                 0.6
+2025-05-03 22:08:20,468 - INFO - cfg.agent.expert_policy                  spl
+2025-05-03 22:08:20,468 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,468 - INFO - environment:
+2025-05-03 22:08:20,469 - INFO - cfg.environment.obs_dir                  ../datasets/observations/
+2025-05-03 22:08:20,469 - INFO - cfg.environment.obs_sum_dir              None
+2025-05-03 22:08:20,469 - INFO - cfg.environment.map_dir                  None
+2025-05-03 22:08:20,470 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,470 - INFO - model:
+2025-05-03 22:08:20,470 - INFO - cfg.model.fix_lang_embedding             False
+2025-05-03 22:08:20,470 - INFO - cfg.model.fix_pano_embedding             False
+2025-05-03 22:08:20,471 - INFO - cfg.model.fix_local_branch               False
+2025-05-03 22:08:20,471 - INFO - cfg.model.num_l_layers                   9
+2025-05-03 22:08:20,471 - INFO - cfg.model.num_pano_layers                2
+2025-05-03 22:08:20,472 - INFO - cfg.model.num_x_layers                   4
+2025-05-03 22:08:20,472 - INFO - cfg.model.graph_sprels                   True
+2025-05-03 22:08:20,472 - INFO - cfg.model.load_text_features             False
+2025-05-03 22:08:20,473 - INFO - cfg.model.text_feat_size                 2048
+2025-05-03 22:08:20,473 - INFO - cfg.model.gmap_max_action_steps          100
+2025-05-03 22:08:20,473 - INFO - cfg.model.max_instr_len                  80
+2025-05-03 22:08:20,473 - INFO - cfg.model.max_objects                    70
+2025-05-03 22:08:20,474 - INFO - cfg.model.pretrained_ckpt                ../data/pretrain/Attnq_pretrained_ckpt.pt
+2025-05-03 22:08:20,474 - INFO - cfg.model.use_moe_layer                  True
+2025-05-03 22:08:20,474 - INFO - cfg.model.moe_type                       Task
+2025-05-03 22:08:20,474 - INFO - cfg.model.moe_position                   Attn_q
+2025-05-03 22:08:20,475 - INFO - cfg.model.task_routing_feature           multi
+2025-05-03 22:08:20,475 - INFO - cfg.model.num_experts                    8
+2025-05-03 22:08:20,475 - INFO - cfg.model.num_experts_per_tok            2
+2025-05-03 22:08:20,475 - INFO - cfg.model.router_aux_loss_coef           0.8
+2025-05-03 22:08:20,476 - INFO - cfg.model.hidden_dropout_prob            0.1
+2025-05-03 22:08:20,476 - INFO - cfg.model.attn_dropout_prob              0.1
+2025-05-03 22:08:20,476 - INFO - cfg.model.feat_dropout                   0.3
+2025-05-03 22:08:20,476 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,477 - INFO - distributed:
+2025-05-03 22:08:20,477 - INFO - cfg.distributed.dist_backend             nccl
+2025-05-03 22:08:20,478 - INFO - cfg.distributed.init_method              env://
+2025-05-03 22:08:20,478 - INFO - cfg.distributed.world_size               1
+2025-05-03 22:08:20,478 - INFO - cfg.distributed.rank                     0
+2025-05-03 22:08:20,478 - INFO - cfg.distributed.local_rank               0
+2025-05-03 22:08:20,479 - INFO - cfg.distributed.no_set_device_rank       False
+2025-05-03 22:08:20,479 - INFO - cfg.distributed.distributed              False
+2025-05-03 22:08:20,479 - INFO - cfg.distributed.device                   cuda:0
+2025-05-03 22:08:20,479 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,480 - INFO - task:
+2025-05-03 22:08:20,480 - INFO - cfg.task.val_source                      ['R2R', 'REVERIE']
+2025-05-03 22:08:20,480 - INFO - cfg.task.ratio                           [20, 1, 1, 10, 1, 1, 1, 1, 2]
+2025-05-03 22:08:20,481 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,481 - INFO - loss_coef:
+2025-05-03 22:08:20,481 - INFO - cfg.task.loss_coef.R2R                   1.0
+2025-05-03 22:08:20,481 - INFO - cfg.task.loss_coef.REVERIE               1.0
+2025-05-03 22:08:20,482 - INFO - cfg.task.loss_coef.RXR-EN                1.0
+2025-05-03 22:08:20,482 - INFO - cfg.task.loss_coef.CVDN                  1.0
+2025-05-03 22:08:20,482 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,482 - INFO - val_max_action_len:
+2025-05-03 22:08:20,483 - INFO - cfg.task.val_max_action_len.R2R          15
+2025-05-03 22:08:20,483 - INFO - cfg.task.val_max_action_len.REVERIE      15
+2025-05-03 22:08:20,484 - INFO - cfg.task.val_max_action_len.RXR-EN       30
+2025-05-03 22:08:20,484 - INFO - cfg.task.val_max_action_len.CVDN         30
+2025-05-03 22:08:20,485 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,485 - INFO - train_max_action_len:
+2025-05-03 22:08:20,485 - INFO - cfg.task.train_max_action_len.R2R        15
+2025-05-03 22:08:20,485 - INFO - cfg.task.train_max_action_len.REVERIE    15
+2025-05-03 22:08:20,486 - INFO - cfg.task.train_max_action_len.RXR-EN     20
+2025-05-03 22:08:20,486 - INFO - cfg.task.train_max_action_len.CVDN       15
+2025-05-03 22:08:20,486 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,486 - INFO - eval_splits:
+2025-05-03 22:08:20,487 - INFO - cfg.task.eval_splits.R2R                 ['val_unseen_subset']
+2025-05-03 22:08:20,487 - INFO - cfg.task.eval_splits.REVERIE             ['val_unseen_subset']
+2025-05-03 22:08:20,487 - INFO - cfg.task.eval_splits.RXR-EN              ['val_unseen_subset', 'val_unseen']
+2025-05-03 22:08:20,488 - INFO - cfg.task.eval_splits.CVDN                ['val_unseen_subset', 'val_unseen']
+2025-05-03 22:08:20,488 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,488 - INFO - dataset:
+2025-05-03 22:08:20,488 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,489 - INFO - R2R:
+2025-05-03 22:08:20,489 - INFO - cfg.dataset.R2R.DIR                      R2R
+2025-05-03 22:08:20,489 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,490 - INFO - SPLIT:
+2025-05-03 22:08:20,490 - INFO - cfg.dataset.R2R.SPLIT.train              R2R_train_mergesim_enc.json
+2025-05-03 22:08:20,490 - INFO - cfg.dataset.R2R.SPLIT.val_train_seen     R2R_val_train_seen_enc.json
+2025-05-03 22:08:20,490 - INFO - cfg.dataset.R2R.SPLIT.val_seen           R2R_val_seen_enc.json
+2025-05-03 22:08:20,491 - INFO - cfg.dataset.R2R.SPLIT.val_unseen         R2R_val_unseen_enc.json
+2025-05-03 22:08:20,491 - INFO - cfg.dataset.R2R.SPLIT.test               R2R_test_enc.json
+2025-05-03 22:08:20,492 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,492 - INFO - REVERIE:
+2025-05-03 22:08:20,493 - INFO - cfg.dataset.REVERIE.DIR                  REVERIE
+2025-05-03 22:08:20,494 - INFO - cfg.dataset.REVERIE.bbox_file            BBoxes.json
+2025-05-03 22:08:20,494 - INFO - cfg.dataset.REVERIE.multi_endpoints      True
+2025-05-03 22:08:20,494 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,495 - INFO - SPLIT:
+2025-05-03 22:08:20,495 - INFO - cfg.dataset.REVERIE.SPLIT.train          REVERIE_train_enc.json
+2025-05-03 22:08:20,495 - INFO - cfg.dataset.REVERIE.SPLIT.val_train_seen REVERIE_val_train_seen_enc.json
+2025-05-03 22:08:20,496 - INFO - cfg.dataset.REVERIE.SPLIT.val_seen       REVERIE_val_seen_enc.json
+2025-05-03 22:08:20,496 - INFO - cfg.dataset.REVERIE.SPLIT.val_unseen     REVERIE_val_unseen_enc.json
+2025-05-03 22:08:20,496 - INFO - cfg.dataset.REVERIE.SPLIT.test           REVERIE_test_enc.json
+2025-05-03 22:08:20,496 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,497 - INFO - RXR_EN:
+2025-05-03 22:08:20,497 - INFO - cfg.dataset.RXR_EN.DIR                   RXR-EN
+2025-05-03 22:08:20,497 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,498 - INFO - SPLIT:
+2025-05-03 22:08:20,498 - INFO - cfg.dataset.RXR_EN.SPLIT.train           RXR-EN_train_enc.json
+2025-05-03 22:08:20,498 - INFO - cfg.dataset.RXR_EN.SPLIT.val_seen        RXR-EN_val_seen_enc.json
+2025-05-03 22:08:20,498 - INFO - cfg.dataset.RXR_EN.SPLIT.val_unseen      RXR-EN_val_unseen_enc.json
+2025-05-03 22:08:20,499 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,499 - INFO - CVDN:
+2025-05-03 22:08:20,499 - INFO - cfg.dataset.CVDN.DIR                     CVDN
+2025-05-03 22:08:20,499 - INFO - cfg.dataset.CVDN.path_type               trusted_path
+2025-05-03 22:08:20,500 - INFO - ---------------------------------------------------------
+2025-05-03 22:08:20,500 - INFO - SPLIT:
+2025-05-03 22:08:20,500 - INFO - cfg.dataset.CVDN.SPLIT.train             train.json
+2025-05-03 22:08:20,501 - INFO - cfg.dataset.CVDN.SPLIT.val_seen          val_seen.json
+2025-05-03 22:08:20,501 - INFO - cfg.dataset.CVDN.SPLIT.val_unseen        val_unseen.json
+2025-05-03 22:08:20,501 - INFO - cfg.dataset.CVDN.SPLIT.test              test_cleaned.json
+2025-05-03 22:08:20,780 - INFO - ********************** Setting up dataloaders **********************
+2025-05-03 22:08:20,780 - INFO - Loading simulation envrionment - MP3D ...
+2025-05-03 22:08:31,150 - INFO - Loaded 90 scans
+2025-05-03 22:08:31,151 - INFO - Finshed building MP3D environment
+2025-05-03 22:08:31,154 - INFO - Found val_unseen_subset_enc.json, skipping download.
+2025-05-03 22:08:31,155 - INFO - Loading R2R data from val_unseen_subset_enc.json
+2025-05-03 22:08:31,160 - INFO - R2R: R2RDataset val_unseen_subset split loaded
+2025-05-03 22:08:31,160 - INFO - 
+- Dataset: load val_unseen_subset split: 200 samples in total
+- Dataset: load val_unseen_subset split: 11 scans in total
+2025-05-03 22:08:31,161 - INFO - Found val_unseen_subset_enc.json, skipping download.
+2025-05-03 22:08:31,162 - INFO - Loading REVERIE data from val_unseen_subset_enc.json
+2025-05-03 22:08:31,275 - INFO - REVERIE: REVERIEDataset val_unseen_subset split loaded
+2025-05-03 22:08:31,275 - INFO - 
+- Dataset: load val_unseen_subset split: 519 samples in total
+- Dataset: load val_unseen_subset split: 10 scans in total

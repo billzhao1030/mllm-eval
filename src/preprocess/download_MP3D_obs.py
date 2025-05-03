@@ -6,7 +6,7 @@ from datasets import load_dataset
 # Setup
 scan_ids = load_hub_data("billzhao1030/MP3D", "scans.txt", extension="txt")
 dataset_repo = "billzhao1030/MP3D_feature"
-save_dir = "../datasets/observations"
+save_dir = "../data/observations"
 
 # Download scan-by-scan
 for scan_id in tqdm(scan_ids, desc="Processing scans"):

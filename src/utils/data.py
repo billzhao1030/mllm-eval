@@ -1,6 +1,5 @@
 import os
 import json
-import math
 
 import numpy as np
 import networkx as nx
@@ -8,8 +7,8 @@ from tqdm import tqdm
 
 import plotly.graph_objects as go
 
+from datasets import load_dataset
 from huggingface_hub import hf_hub_download
-
 
 def load_hub_data(repo_id, filename, extension="json"):
     json_path = hf_hub_download(
@@ -199,3 +198,47 @@ def visualize_graph_3d_rotating(G, title="3D Navigation Graph"):
         }]
     )
     fig.show()
+
+def download_mp3d_observations(logger, save_dir="../data/observations", overwrite=False):
+    """
+    Download MP3D feature observations scan-by-scan from Hugging Face.
+    
+    Parameters:
+        save_dir (str): Directory to save the observations.
+        overwrite (bool): If True, re-download even if scan already exists.
+    """
+    # Check if the save_dir exists
+    if os.path.exists(save_dir) and not overwrite:
+        logger.info(f"🟢 Observation folder '{save_dir}' already exists. Skipping download.")
+        return
+
+    # Ensure save_dir is created if not exists
+    os.makedirs(save_dir, exist_ok=True)
+
+    # Load scan IDs
+    scan_ids = load_hub_data("billzhao1030/MP3D", "scans.txt", extension="txt")
+    dataset_repo = "billzhao1030/MP3D_feature"
+
+    # Download scan-by-scan
+    for scan_id in tqdm(scan_ids, desc="Processing scans"):
+        scan_folder = os.path.join(save_dir, scan_id)
+        os.makedirs(scan_folder, exist_ok=True)
+
+        if not overwrite and os.listdir(scan_folder):
+            logger.info(f"Scan {scan_id} already downloaded, skipping.")
+            continue
+
+        logger.info(f"\n⬇️  Downloading split (scan): {scan_id}")
+        scan_dataset = load_dataset(dataset_repo, split=scan_id, streaming=True)
+
+        for item in tqdm(scan_dataset, desc=f"Downloading {scan_id}", leave=False):
+            viewpoint_id = item["viewpoint_id"]
+
+            for i in range(4):
+                img = item[f"image_{i}"]
+                img_save_path = os.path.join(scan_folder, f"{viewpoint_id}_{i}.png")
+                img.save(img_save_path)
+
+        logger.info(f"✅ Finished scan {scan_id}.\n")
+
+    logger.info("🏁 All scans finished.")
