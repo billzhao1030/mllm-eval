@@ -43,8 +43,4 @@ def create_observation_db(config):
     map_dir = config.environment.map_dir
 
     return ImageObservationDB(img_obs_dir, img_obs_sum_dir, map_dir)
-    
-
-def create_object_feature_db(args):
-    pass
 

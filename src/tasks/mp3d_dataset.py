@@ -1,11 +1,14 @@
 import os
 import torch
+import random
 from logging import Logger
 from omegaconf import DictConfig
 from typing import List, Dict
 from collections import defaultdict
 from .base_dataset import BaseDataset
 from huggingface_hub import hf_hub_download
+from .mp3d_env import EnvBatch
+from .feature_db import ImageObservationDB
 
 class MP3DDataset(BaseDataset):
     TASK_ID = {
@@ -21,6 +24,7 @@ class MP3DDataset(BaseDataset):
         config: DictConfig,
         split: str,
         environment: Dict,
+        obs_db: ImageObservationDB,
         logger: Logger,
         task: str
     ):
@@ -28,20 +32,18 @@ class MP3DDataset(BaseDataset):
 
         self.config = config
         self.logger = logger
-        self.debug = config.experiment.debug
         self.task = task
         self.split = split
         
         self.batch_size = config.experiment.batch_size
         self.seed = config.experiment.seed
 
-        self.feat_db = None
+        self.ix = 0 # Index for iterating through data
 
         # Load MP3D dataset
         msg = self._load_data(config.experiment.data_dir)
 
-        self.buffered_state_dict = {}
-
+        # Set up environment
         all_graphs = environment['graphs']
         all_shortest_paths = environment['shortest_path']
         all_shortest_distances = environment['shortest_distance']
@@ -57,9 +59,11 @@ class MP3DDataset(BaseDataset):
         logger.info(f"{task}: {self.__class__.__name__} {split} split loaded")
         logger.info(msg)
 
+        # Set up Simluator
+        env_data = {key: environment[key] for key in ["navigable", "location"]}
+        self.env = EnvBatch(env_data, obs_db, self.batch_size)
 
     def _load_data(self, data_dir):
-        self.data = dict()
         msg = ""
 
         # Set file extension
@@ -101,36 +105,100 @@ class MP3DDataset(BaseDataset):
             dst.write(src.read())
         self.logger.info(f"Downloaded {hub_filename} -> {local_path}")
 
-    def __len__(self):
+
+    def size(self):
+        """Returns the total number of instructions."""
         return len(self.data)
 
     def init_obs_db(self, obs_db):
         self.obs_db = obs_db
 
-    @staticmethod
-    def collate_batch(
-        batch_list: List[Dict],
-        _unused: bool = False,
-    ) -> Dict:
-        # batch list is a list of dictionaries from __getitem__
-        data_dict = defaultdict(list)
+    def _next_minibatch(self, batch_size=None, **kwargs):
+        """
+        Store the minibach in 'self.batch'
+        """
+        if batch_size is None:
+            batch_size = self.batch_size
+        
+        batch = self.data[self.ix: self.ix+batch_size]
+        if len(batch) < batch_size:
+            random.shuffle(self.data)
+            self.ix = batch_size - len(batch)
+            batch += self.data[:self.ix]
+        else:
+            self.ix += batch_size
+        self.batch = batch
 
-        # collate the data dictionaries from the batch list into a single dictionary
-        for cur_sample in batch_list:
-            for key, val in cur_sample.items():
-                data_dict[key].append(val)
-        batch_size = len(batch_list)
-        ret = {}
-        for key, val in data_dict.items():
-            try:
-                if key in ['NotImplemented']:
-                    ret[key] = torch.stack(val, 0)
-                else:
-                    ret[key] = val
-            except:
-                print('Error in collate_batch: key=%s' % key)
-                raise TypeError
+    def reset_epoch(self, shuffle=False):
+        ''' Resets the data index to the beginning of the epoch. For testing, shuffle data if requested. '''
+        if shuffle:
+            random.shuffle(self.data)
+        self.ix = 0
 
-        ret['batch_size'] = batch_size
-        return ret
+    def _get_obs(self):
+        """Gets observations for the current batch of environments."""
+        obs = []
+
+        for i, (observation, state) in enumerate(self.env.getStates()):
+            item = self.batch[i]
+
+            ob = {
+                **observation,
+                **state,
+                **item
+            }
+
+            if ob['instr_id'] in self.gt_trajs:
+                ob['distance'] = self.environment['shortest_distance'][ob['scan']][ob['viewpoint']][item['path'][-1]]
+            else:
+                ob['distance'] = 0
+
+            obs.append(ob)
+        
+        return obs
+
+    def reset(self, **kwargs):
+        ''' Loads a new minibatch of episodes and resets the environments. '''
+        self._next_minibatch(**kwargs)
+
+        scanIds = [item['scan'] for item in self.batch]
+        viewpointIds = [item['path'][0] for item in self.batch]
+        headings = [item['heading'] for item in self.batch]
+        self.env.newEpisodes(scanIds, viewpointIds, headings)  # Initialize environments.
+        return self._get_obs()
+
+    def step(self, next_viewpoint_IDs):
+        ''' Takes action in the environments (same interface as makeActions). '''
+        self.env.makeActions(next_viewpoint_IDs)
+        return self._get_obs()
+    
+
+    
+
+    # @staticmethod
+    # def collate_batch(
+    #     batch_list: List[Dict],
+    #     _unused: bool = False,
+    # ) -> Dict:
+    #     # batch list is a list of dictionaries from __getitem__
+    #     data_dict = defaultdict(list)
+
+    #     # collate the data dictionaries from the batch list into a single dictionary
+    #     for cur_sample in batch_list:
+    #         for key, val in cur_sample.items():
+    #             data_dict[key].append(val)
+    #     batch_size = len(batch_list)
+    #     ret = {}
+    #     for key, val in data_dict.items():
+    #         try:
+    #             if key in ['NotImplemented']:
+    #                 ret[key] = torch.stack(val, 0)
+    #             else:
+    #                 ret[key] = val
+    #         except:
+    #             print('Error in collate_batch: key=%s' % key)
+    #             raise TypeError
+
+    #     ret['batch_size'] = batch_size
+    #     return ret
             

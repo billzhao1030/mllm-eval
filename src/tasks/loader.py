@@ -33,7 +33,7 @@ def create_environment(logger):
     return environment
 
 
-def create_dataloader(
+def create_val_env(
     config: DictConfig, 
     logger: Logger, 
     environment,
@@ -61,6 +61,7 @@ def create_dataloader(
                 config=config, 
                 split=split, 
                 environment=environment, 
+                obs_db = image_obs_db,
                 logger=logger, 
                 task=task
             )
@@ -68,15 +69,17 @@ def create_dataloader(
             # Set observation database
             dataset.init_obs_db(image_obs_db)
 
-            task_loader, pre_epoch = build_dataloader(
-                 dataset=dataset,
-                 distributed=config.distributed.distributed,
-                 batch_size=config.experiment.batch_size,
-                 num_workers=config.experiment.workers
-            )
+            # val_env = 
 
-            dataloader_name = f"{task}.{split}"
-            dataloaders[dataloader_name] = PrefetchLoader(task_loader, device=device)
+            # task_loader, pre_epoch = build_dataloader(
+            #      dataset=dataset,
+            #      distributed=config.distributed.distributed,
+            #      batch_size=config.experiment.batch_size,
+            #      num_workers=config.experiment.workers
+            # )
+
+            # dataloader_name = f"{task}.{split}"
+            # dataloaders[dataloader_name] = PrefetchLoader(task_loader, device=device)
 
     return dataloaders
 

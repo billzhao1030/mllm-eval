@@ -7,7 +7,7 @@ import argparse
 # from argument import parse_args
 from omegaconf import OmegaConf
 from utils.distributed import world_info_from_env, init_distributed_device
-from tasks.loader import create_environment, create_dataloader
+from tasks.loader import create_environment, create_val_env
 from utils.common_utils import setup_logger, log_config_to_file
 
 
@@ -100,7 +100,7 @@ def main():
     environment = create_environment(logger)
     logger.info("Finshed building MP3D environment")
 
-    dataloaders = create_dataloader(config, logger, environment, device_id)
+    dataloaders = create_val_env(config, logger, environment, device_id)
     logger.info("Finshed building data loader")
 
 
