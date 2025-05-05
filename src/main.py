@@ -111,4 +111,21 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    config = parse_args()
+
+    # Setup logging
+    output_path = os.path.join(config.experiment.output_dir, config.experiment.id)
+    os.makedirs(output_path, exist_ok=True)
+    os.makedirs(os.path.join(output_path, 'ckpts'), exist_ok=True)
+    os.makedirs(os.path.join(output_path, 'results'), exist_ok=True)
+    logger = setup_logger(log_file=os.path.join(output_path, f'{config.experiment.id}.log'), rank=config.distributed.rank)
+
+
+    # from models import get_models
+    # model_cls = get_models("qwen2_5_vl", logger)
+    # model = model_cls(config)
+
+    # out = model()
+
+    
