@@ -15,4 +15,4 @@ model:
 
 task:
   val_source:                  # Source datasets for testing
-    ['RXR']
+    ['CVDN']

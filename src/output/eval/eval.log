@@ -6242,3 +6242,77 @@
 2025-05-15 14:35:15,228 - INFO - ********************** Start logging **********************
 2025-05-15 14:35:15,232 - INFO - ********************** Setting up dataloaders **********************
 2025-05-15 14:35:15,232 - INFO - Loading simulation envrionment - MP3D ...
+2025-05-15 14:51:31,602 - INFO - ********************** Start logging **********************
+2025-05-15 14:51:31,608 - INFO - ********************** Setting up dataloaders **********************
+2025-05-15 14:51:31,608 - INFO - Loading simulation envrionment - MP3D ...
+2025-05-15 14:51:34,544 - INFO - Loaded 90 scans
+2025-05-15 14:51:34,544 - INFO - Finshed building MP3D environment
+2025-05-15 14:59:00,908 - INFO - ********************** Start logging **********************
+2025-05-15 14:59:00,915 - INFO - ********************** Setting up dataloaders **********************
+2025-05-15 14:59:00,916 - INFO - Loading simulation envrionment - MP3D ...
+2025-05-15 14:59:03,257 - INFO - Loaded 90 scans
+2025-05-15 14:59:03,258 - INFO - Finshed building MP3D environment
+2025-05-15 15:01:47,416 - INFO - ********************** Start logging **********************
+2025-05-15 15:01:47,425 - INFO - ********************** Setting up dataloaders **********************
+2025-05-15 15:01:47,425 - INFO - Loading simulation envrionment - MP3D ...
+2025-05-15 15:01:49,550 - INFO - Loaded 90 scans
+2025-05-15 15:01:49,551 - INFO - Finshed building MP3D environment
+2025-05-15 15:12:04,883 - INFO - ********************** Start logging **********************
+2025-05-15 15:12:04,891 - INFO - ********************** Setting up dataloaders **********************
+2025-05-15 15:12:04,892 - INFO - Loading simulation envrionment - MP3D ...
+2025-05-15 15:12:06,935 - INFO - Loaded 90 scans
+2025-05-15 15:12:06,936 - INFO - Finshed building MP3D environment
+2025-05-15 15:12:55,098 - INFO - ********************** Start logging **********************
+2025-05-15 15:12:55,103 - INFO - ********************** Setting up dataloaders **********************
+2025-05-15 15:12:55,104 - INFO - Loading simulation envrionment - MP3D ...
+2025-05-15 15:12:56,973 - INFO - Loaded 90 scans
+2025-05-15 15:12:56,974 - INFO - Finshed building MP3D environment
+2025-05-15 15:13:02,124 - INFO - Downloaded CVDN/val_unseen_subset_enc.json -> ../data\CVDN\val_unseen_subset_enc.json
+2025-05-15 15:13:02,125 - INFO - Loading CVDN data from val_unseen_subset_enc.json
+2025-05-15 15:16:49,433 - INFO - ********************** Start logging **********************
+2025-05-15 15:16:49,440 - INFO - ********************** Setting up dataloaders **********************
+2025-05-15 15:16:49,441 - INFO - Loading simulation envrionment - MP3D ...
+2025-05-15 15:16:51,506 - INFO - Loaded 90 scans
+2025-05-15 15:16:51,507 - INFO - Finshed building MP3D environment
+2025-05-15 15:17:10,185 - INFO - Found val_unseen_subset_enc.json, skipping download.
+2025-05-15 15:17:10,836 - INFO - Loading CVDN data from val_unseen_subset_enc.json
+2025-05-15 15:21:21,935 - INFO - ********************** Start logging **********************
+2025-05-15 15:21:21,941 - INFO - ********************** Setting up dataloaders **********************
+2025-05-15 15:21:21,942 - INFO - Loading simulation envrionment - MP3D ...
+2025-05-15 15:21:23,767 - INFO - Loaded 90 scans
+2025-05-15 15:21:23,768 - INFO - Finshed building MP3D environment
+2025-05-15 15:21:28,171 - INFO - Found val_unseen_subset_enc.json, skipping download.
+2025-05-15 15:21:28,172 - INFO - Loading CVDN data from val_unseen_subset_enc.json
+2025-05-15 15:21:49,932 - INFO - CVDN: CVDNDataset val_unseen_subset split loaded
+2025-05-15 15:21:49,934 - INFO - 
+- Dataset: load val_unseen_subset split: 200 samples in total
+- Dataset: load val_unseen_subset split: 10 scans in total
+2025-05-15 15:23:05,255 - INFO - ********************** Start logging **********************
+2025-05-15 15:23:05,261 - INFO - ********************** Setting up dataloaders **********************
+2025-05-15 15:23:05,262 - INFO - Loading simulation envrionment - MP3D ...
+2025-05-15 15:23:07,055 - INFO - Loaded 90 scans
+2025-05-15 15:23:07,055 - INFO - Finshed building MP3D environment
+2025-05-15 15:23:11,435 - INFO - Found val_unseen_subset_enc.json, skipping download.
+2025-05-15 15:23:11,436 - INFO - Loading CVDN data from val_unseen_subset_enc.json
+2025-05-15 15:23:11,991 - INFO - CVDN: CVDNDataset val_unseen_subset split loaded
+2025-05-15 15:23:11,992 - INFO - 
+- Dataset: load val_unseen_subset split: 200 samples in total
+- Dataset: load val_unseen_subset split: 10 scans in total
+2025-05-15 15:23:52,729 - INFO - ********************** Start logging **********************
+2025-05-15 15:23:52,736 - INFO - ********************** Setting up dataloaders **********************
+2025-05-15 15:23:52,736 - INFO - Loading simulation envrionment - MP3D ...
+2025-05-15 15:23:54,694 - INFO - Loaded 90 scans
+2025-05-15 15:23:54,694 - INFO - Finshed building MP3D environment
+2025-05-15 15:23:58,000 - INFO - Found val_unseen_subset_enc.json, skipping download.
+2025-05-15 15:23:58,001 - INFO - Loading CVDN data from val_unseen_subset_enc.json
+2025-05-15 15:23:58,564 - INFO - CVDN: CVDNDataset val_unseen_subset split loaded
+2025-05-15 15:23:58,565 - INFO - 
+- Dataset: load val_unseen_subset split: 200 samples in total
+- Dataset: load val_unseen_subset split: 10 scans in total
+2025-05-15 15:24:08,534 - INFO - Downloaded CVDN/val_unseen_enc.json -> ../data\CVDN\val_unseen_enc.json
+2025-05-15 15:24:08,535 - INFO - Loading CVDN data from val_unseen_enc.json
+2025-05-15 15:24:11,703 - INFO - CVDN: CVDNDataset val_unseen split loaded
+2025-05-15 15:24:11,704 - INFO - 
+- Dataset: load val_unseen split: 907 samples in total
+- Dataset: load val_unseen split: 10 scans in total
+2025-05-15 15:24:27,866 - INFO - Finshed building data batch env

@@ -9,7 +9,7 @@ import torch
 # from torch.utils.data import DataLoader, SequentialSampler
 # from typing import List, Dict, Tuple, Union
 
-from utils.data import load_hub_data, load_graph, download_hub_file
+from utils.data import load_hub_data, load_graph
 from .feature_db import create_observation_db
 from tasks import load_dataset
 

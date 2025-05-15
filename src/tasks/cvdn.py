@@ -6,12 +6,11 @@ from logging import Logger
 from typing import List, Dict
 from omegaconf import DictConfig
 from collections import defaultdict
-from transformers import BertTokenizer
 from .mp3d_env import Simulator
 from .mp3d_dataset import MP3DDataset
+from .feature_db import ImageObservationDB
 
 ERROR_MARGIN = 3.0
-
 
 class CVDNDataset(MP3DDataset):
     name = "cvdn"
@@ -20,26 +19,25 @@ class CVDNDataset(MP3DDataset):
         self,
         config: DictConfig,
         split: str,
-        environments: Dict,
+        environment: Dict,
+        obs_db: ImageObservationDB,
         logger: Logger = None,
-        source: str = None,
+        task: str = None,
     ):
-        super().__init__(config, split, environments, logger, source)
+        super().__init__(config, split, environment, obs_db, logger, task)
 
-        for idx, item in enumerate(self.alldata):
+        for _, item in enumerate(self.data):
             if config.dataset.CVDN.path_type=="trusted_path" and "end_panos" in item and item['path'][-1] not in item['end_panos']:
                 dist_start_to_end = None
                 goal_vp = None
                 for end_vp in item['end_panos']:
-                    d = self.environments['mattersim']["shortest_paths"][item['scan']][item['start_pano']['pano']][end_vp]
+                    d = self.environment["shortest_path"][item['scan']][item['start_pano']][end_vp]
                     if dist_start_to_end is None or len(d) < len(dist_start_to_end):
                         dist_start_to_end = d
                         goal_vp = end_vp
-                item['path'] = self.environments['mattersim']["shortest_paths"][item['scan']][item['start_pano']['pano']][goal_vp]
+                item['path'] = self.environment["shortest_path"][item['scan']][item['start_pano']][goal_vp]
 
     def load_data(self, anno_file, debug=False, path_type='trusted_path'):
-        tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-
         with open(str(anno_file), "r") as f:
             data = json.load(f)
         new_data = []
@@ -48,12 +46,12 @@ class CVDNDataset(MP3DDataset):
         data = tqdm(data, desc="Loading data")
         for i, item in enumerate(data):
             new_item = dict(item)
-            new_item['heading'] = None  # item['start_pano']['heading']
+            new_item['heading'] = None
             if path_type == 'trusted_path':
                 if 'planner_path' in item:
                     new_item['path'] = item['planner_path']
                 else:
-                    new_item['path'] = [item['start_pano']['pano']]
+                    new_item['path'] = [item['start_pano']]
             else:
                 raise NotImplementedError
 
@@ -77,12 +75,13 @@ class CVDNDataset(MP3DDataset):
                 new_item['instruction'] += sentences
             if new_item['instruction'][-1] == '\n':
                 new_item['instruction'] = new_item['instruction'][:-1]
-            new_item['path_id'] = item['inst_idx']
+            new_item['game_idx'] = item['game_idx']
+            new_item['nav_idx'] = item['nav_idx']
             new_item['raw_idx'] = i
-            new_item['instr_encoding'] = tokenizer.encode(new_item['instruction'], add_special_tokens=True)
+            new_item['instr_encoding'] = item['instr_encoding']
             new_item['data_type'] = 'cvdn'
             new_item['sample_idx'] = sample_idx
-            new_item['instr_id'] = 'cvdn_{}_{}'.format(sample_idx, new_item['path_id'])
+            new_item['instr_id'] = 'cvdn_{}_{}'.format(sample_idx, new_item['instr_id'])
 
             new_data.append(new_item)
             sample_idx += 1
