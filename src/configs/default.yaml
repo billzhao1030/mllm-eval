@@ -11,6 +11,7 @@ experiment:
   submit: false                # Submission mode
   no_backtrack: false          # Disable backtracking
   detailed_output: false       # Enable detailed output
+  model: None
 
   # Checkpoint Configuration
   resume_file: null            # Path to resume a trained model

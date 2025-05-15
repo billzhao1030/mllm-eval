@@ -3140,3 +3140,6 @@
 - Dataset: load val_unseen_subset split: 519 samples in total
 - Dataset: load val_unseen_subset split: 10 scans in total
 2025-05-04 23:20:25,818 - INFO - start
+2025-05-05 11:25:07,058 - ERROR - Failed to import Qwen2_5_VL from qwen2_5_vl: No module named 'src'
+2025-05-05 11:26:24,262 - ERROR - Failed to import Qwen2_5_VL from qwen2_5_vl: No module named 'transformers'
+2025-05-05 11:30:43,609 - ERROR - Failed to import Qwen2_5_VL from qwen2_5_vl: No module named 'src'

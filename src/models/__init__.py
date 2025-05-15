@@ -9,7 +9,7 @@ def get_models(model_name, logger):
     
     model_class = AVAILABLE_MODELS[model_name]
     if "." not in model_class:
-        model_class = f"src.models.{model_name}.{model_class}"
+        model_class = f"models.{model_name}.{model_class}"
 
     try:
         model_module, model_class = model_class.rsplit(".", 1)

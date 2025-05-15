@@ -6,6 +6,7 @@ experiment:
   use_neptune: true
   neptune_project: "VLN/VersNav"
   tags: ["moe_coef_0.8", "TaskMoE-multi", "w/o SCALEVLN", "Attn_q"]
+  model: "qwen2_5_vl"
 
 model:
   moe_position: "Attn_q"

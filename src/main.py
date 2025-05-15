@@ -111,21 +111,42 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
-    config = parse_args()
-
     # Setup logging
-    output_path = os.path.join(config.experiment.output_dir, config.experiment.id)
-    os.makedirs(output_path, exist_ok=True)
-    os.makedirs(os.path.join(output_path, 'ckpts'), exist_ok=True)
-    os.makedirs(os.path.join(output_path, 'results'), exist_ok=True)
-    logger = setup_logger(log_file=os.path.join(output_path, f'{config.experiment.id}.log'), rank=config.distributed.rank)
+    import logging
+    logger = logging.getLogger(__name__)
+    logging.basicConfig(level=logging.INFO)
 
+    from PIL import Image
+    from models import get_models
+    model_cls = get_models("qwen2_5_vl", logger)
+    model = model_cls(config={})
 
-    # from models import get_models
-    # model_cls = get_models("qwen2_5_vl", logger)
-    # model = model_cls(config)
+     # Prepare the input data
+    image_paths = [
+        "./data/0b22fa63d0f54a529c525afbf2e8bb25_0.png",
+        "./data/0b22fa63d0f54a529c525afbf2e8bb25_1.png",
+        "./data/0b22fa63d0f54a529c525afbf2e8bb25_2.png",
+        "./data/0b22fa63d0f54a529c525afbf2e8bb25_3.png",
+    ]
+    images = []
+    for path in image_paths:
+        try:
+            img = Image.open(path).convert("RGB")
+            images.append(img)
+        except FileNotFoundError:
+            logger.error(f"Image file not found: {path}")
+            exit()
 
-    # out = model()
+    input_data = {
+        "views": images,
+        "instruction": "Describe the scene in detail."
+    }
+    prompt = "{image} {instruction}"
+
+    output = model(prompt, input_data)
+
+    print(output)
+
+    print("done")
 
     
