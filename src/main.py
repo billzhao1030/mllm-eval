@@ -107,48 +107,9 @@ def main():
     # Load agent 
     ############################################################
     
-
+    
 
 
 if __name__ == '__main__':
     main()
-
-    # # Setup logging
-    # import logging
-    # logger = logging.getLogger(__name__)
-    # logging.basicConfig(level=logging.INFO)
-
-    # from PIL import Image
-    # from models import get_models
-    # model_cls = get_models("qwen2_5_vl", logger)
-    # model = model_cls(config={})
-
-    #  # Prepare the input data
-    # image_paths = [
-    #     "./data/0b22fa63d0f54a529c525afbf2e8bb25_0.png",
-    #     "./data/0b22fa63d0f54a529c525afbf2e8bb25_1.png",
-    #     "./data/0b22fa63d0f54a529c525afbf2e8bb25_2.png",
-    #     "./data/0b22fa63d0f54a529c525afbf2e8bb25_3.png",
-    # ]
-    # images = []
-    # for path in image_paths:
-    #     try:
-    #         img = Image.open(path).convert("RGB")
-    #         images.append(img)
-    #     except FileNotFoundError:
-    #         logger.error(f"Image file not found: {path}")
-    #         exit()
-
-    # input_data = {
-    #     "views": images,
-    #     "instruction": "Describe the scene in detail."
-    # }
-    # prompt = "{image} {instruction}"
-
-    # output = model(prompt, input_data)
-
-    # print(output)
-
-    # print("done")
-
     
