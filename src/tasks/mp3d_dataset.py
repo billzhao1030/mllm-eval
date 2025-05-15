@@ -69,7 +69,7 @@ class MP3DDataset(BaseDataset):
         msg = ""
 
         # Set file extension
-        ext = ".jsonl" if self.task == "RXR_EN" else ".json"
+        ext = ".jsonl" if self.task == "RXR" else ".json"
 
         # Create local target folder
         target_folder = os.path.join(data_dir, self.task)

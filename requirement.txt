@@ -4,8 +4,3 @@ datasets
 omegaconf
 transformers
 huggingface_hub
-
---find-links https://download.pytorch.org/whl/cu121
-torch
-torchvision
-torchaudio

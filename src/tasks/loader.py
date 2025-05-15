@@ -1,4 +1,6 @@
 import copy
+import os
+import json
 from logging import Logger
 from omegaconf import DictConfig
 import torch
@@ -7,7 +9,7 @@ import torch
 # from torch.utils.data import DataLoader, SequentialSampler
 # from typing import List, Dict, Tuple, Union
 
-from utils.data import load_hub_data, load_graph
+from utils.data import load_hub_data, load_graph, download_hub_file
 from .feature_db import create_observation_db
 from tasks import load_dataset
 
@@ -15,9 +17,10 @@ from tasks import load_dataset
 def create_environment(logger):
     logger.info("Loading simulation envrionment - MP3D ...")
 
-    navigable_data = load_hub_data("billzhao1030/MP3D", "navigable.json")
-    location_data = load_hub_data("billzhao1030/MP3D", "location.json")
-    scans = load_hub_data("billzhao1030/MP3D", "scans.txt", extension="txt")
+
+    navigable_data = load_hub_data("billzhao1030/MP3D", "navigable.json", save_dir="../data/MP3D")
+    location_data = load_hub_data("billzhao1030/MP3D", "location.json", save_dir="../data/MP3D")
+    scans = load_hub_data("billzhao1030/MP3D", "scans.txt", extension="txt", save_dir="../data/MP3D")
 
     graphs, shortest_paths, shortest_distance = load_graph(location_data, navigable_data, scans)
 

@@ -1,5 +1,6 @@
 import os
 import json
+import pickle
 
 import numpy as np
 import networkx as nx
@@ -12,20 +13,34 @@ import plotly.graph_objects as go
 from datasets import load_dataset
 from huggingface_hub import hf_hub_download
 
-def load_hub_data(repo_id, filename, extension="json"):
-    json_path = hf_hub_download(
-        repo_id=repo_id,
-        filename=filename,
-        repo_type="dataset"
-    )
+def load_hub_data(repo_id, filename, extension="json", save_dir="../data"):
+    # Ensure the save directory exists
+    os.makedirs(save_dir, exist_ok=True)
+
+    file_path = f"{save_dir}/{filename}"
+
+    if not os.path.exists(file_path):
+        print(f"{file_path} not exist, downloading from Hugging Face...")
+        hf_hub_download(
+            repo_id=repo_id,
+            filename=filename,
+            repo_type="dataset",
+            local_dir=save_dir
+        )
+    else:
+        print(f"{file_path} exist, loading data...")
 
     if extension.lower() == "json":
-        with open(json_path, 'r') as f:
+        with open(file_path, 'r') as f:
             data = json.load(f)
         return data
     elif extension.lower() == "txt":
-        with open(json_path, 'r') as f:
+        with open(file_path, 'r') as f:
             data = [line.strip() for line in f]
+        return data
+    elif extension.lower() == "pkl":
+        with open(file_path, "rb") as f:
+            data = pickle.load(f)
         return data
     else:
         print(f"Unsupported extension: {extension}.")
@@ -42,22 +57,8 @@ def load_graph(location_data, navigable_data, scans):
     
     graphs = load_nav_graphs(location_data, navigable_data, scans)
 
-    shortest_paths = {}
-    graphs_bar = tqdm(
-        graphs.items(),
-        desc='Computing shortest paths',
-    )
-    for scan, G in graphs_bar:  # compute all shortest paths
-        shortest_paths[scan] = dict(nx.all_pairs_dijkstra_path(G))
-
-    shortest_distances = {}
-    
-    graphs_bar = tqdm(
-        graphs.items(),
-        desc='Computing shortest distances',
-    )
-    for scan, G in graphs_bar:  # compute all shortest paths
-        shortest_distances[scan] = dict(nx.all_pairs_dijkstra_path_length(G))
+    shortest_paths = load_hub_data("billzhao1030/MP3D", "graphs/shortest_paths.pkl", extension="pkl")
+    shortest_distances = load_hub_data("billzhao1030/MP3D", "graphs/shortest_distances.pkl", extension="pkl")
     
     return graphs, shortest_paths, shortest_distances
 

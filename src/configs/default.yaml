@@ -88,32 +88,32 @@ distributed:
 # Tasks Configuration
 task:
   val_source:                  # Source datasets for testing
-    ['RXR-EN', 'R2R', 'REVERIE', 'CVDN']
+    ['RXR', 'R2R', 'REVERIE', 'CVDN']
   ratio:                       # Training ratio of each dataset
     [20, 1, 1, 10, 1, 1, 1, 1, 2]
   loss_coef: {                 # Loss coefficient for each dataset
     "R2R": 1.0,
     "REVERIE": 1.0,
-    "RXR-EN": 1.0,
+    "RXR_EN": 1.0,
     "CVDN": 1.0,
   }
   val_max_action_len: {        # Maximum action length for validation
     "R2R": 15,
     "REVERIE": 15,
-    "RXR-EN": 30,
+    "RXR_EN": 30,
     "CVDN": 30,                # from VLN-SIG
   }
   train_max_action_len: {      # Maximum action length for training
     "R2R": 15,
     "REVERIE": 15,
-    "RXR-EN": 20,
+    "RXR_EN": 20,
     "CVDN": 15,
   }
 
   eval_splits: {                # Evaluation splits
     "R2R": ["val_unseen_subset"],
     "REVERIE": ["val_unseen_subset"],
-    "RXR-EN": ["val_unseen_subset", "val_unseen"],
+    "RXR": ["val_unseen_subset", "val_unseen"],
     "CVDN": ["val_unseen_subset", "val_unseen"],
   }
 
@@ -140,11 +140,11 @@ dataset:
       "test": "REVERIE_test_enc.json"
     }
   RXR_EN:                       # RXR-EN
-    DIR: "RXR-EN"               # Dataset directory
+    DIR: "RXR_EN"               # Dataset directory
     SPLIT: {                    # Split files
-      "train": "RXR-EN_train_enc.json",
-      "val_seen": "RXR-EN_val_seen_enc.json",
-      "val_unseen": "RXR-EN_val_unseen_enc.json",
+      "train": "RXR_EN_train_enc.json",
+      "val_seen": "RXR_EN_val_seen_enc.json",
+      "val_unseen": "RXR_EN_val_unseen_enc.json",
     }
   CVDN:                         # CVDN
     DIR: "CVDN"                 # Dataset directory

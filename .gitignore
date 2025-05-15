@@ -1,2 +1,5 @@
-data
+data/observations
+data/graphs
 nav_src/LLMs/lavis
+src/tasks/__pycache__/
+src/utils/__pycache__/
