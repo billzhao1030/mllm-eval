@@ -1,2 +1,5 @@
 VLN: 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
 local: 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
+
+git config --global user.name "billzhao1030"
+git config --global user.email "billzhao1030@gmail.com"
