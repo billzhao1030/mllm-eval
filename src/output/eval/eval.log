@@ -6316,3 +6316,11 @@
 - Dataset: load val_unseen split: 907 samples in total
 - Dataset: load val_unseen split: 10 scans in total
 2025-05-15 15:24:27,866 - INFO - Finshed building data batch env
+2025-05-19 19:48:34,110 - INFO - ********************** Start logging **********************
+2025-05-19 19:48:34,111 - INFO - ********************** Setting up dataloaders **********************
+2025-05-19 19:48:34,113 - INFO - Loading simulation envrionment - MP3D ...
+2025-05-19 19:49:47,105 - INFO - ********************** Start logging **********************
+2025-05-19 19:49:47,106 - INFO - ********************** Setting up dataloaders **********************
+2025-05-19 19:49:47,109 - INFO - Loading simulation envrionment - MP3D ...
+2025-05-19 19:49:58,687 - INFO - Loaded 90 scans
+2025-05-19 19:49:58,688 - INFO - Finshed building MP3D environment

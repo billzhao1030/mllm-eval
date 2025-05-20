@@ -100,7 +100,7 @@ def main():
     environment = create_environment(logger)
     logger.info("Finshed building MP3D environment")
 
-    val_envs = create_val_env(config, logger, environment, device_id)
+    val_envs = create_val_env(config, logger, environment)
     logger.info("Finshed building data batch env")
 
     ############################################################

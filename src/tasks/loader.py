@@ -17,7 +17,6 @@ from tasks import load_dataset
 def create_environment(logger):
     logger.info("Loading simulation envrionment - MP3D ...")
 
-
     navigable_data = load_hub_data("billzhao1030/MP3D", "navigable.json", save_dir="../data/MP3D")
     location_data = load_hub_data("billzhao1030/MP3D", "location.json", save_dir="../data/MP3D")
     scans = load_hub_data("billzhao1030/MP3D", "scans.txt", extension="txt", save_dir="../data/MP3D")
@@ -41,7 +40,6 @@ def create_val_env(
     config: DictConfig, 
     logger: Logger, 
     environment,
-    device: torch.device
 ):
     task_cfg = copy.deepcopy(config.task)
 

@@ -11,6 +11,8 @@ class ImageObservationDB(object):
         self.map_dir = map_dir
         self._obs_store = {}
 
+        self.directions = ["left", "front", "right", "back"]
+
     def get_image_observation(self, scan, viewpoint):
         key = "%s_%s" % (scan, viewpoint)
         if key in self._obs_store:
@@ -21,8 +23,11 @@ class ImageObservationDB(object):
         
         # Load image observation
         image_list = []
-        for i in range(4):
-            image_path = os.path.join(self.image_obs_dir, scan, f"{viewpoint}_{i}.png")
+        for direction in self.directions:
+            image_filename = f"{scan}_{viewpoint}_{direction}"
+            image_path = os.path.join(self.image_obs_dir, image_filename)
+            if not os.path.exists(image_path):
+                raise FileNotFoundError(f"Missing image: {image_path}")
             image = Image.open(image_path)
             image_list.append(image)
         self._obs_store[key]['img_obs'] = image_list

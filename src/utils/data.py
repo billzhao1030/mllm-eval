@@ -246,6 +246,52 @@ def download_mp3d_observations(logger, save_dir="../data/observations", overwrit
 
     logger.info("🏁 All scans finished.")
 
+import os
+from tqdm import tqdm
+from datasets import load_dataset
+
+def download_marked_mp3d_observations(logger, save_dir="../data/marked_obs", overwrite=False):
+    """
+    Download marked MP3D observations (panoramic directional images) from Hugging Face.
+
+    Each image will be saved as {scan_id}_{viewpoint_id}_{direction}.png.
+
+    Parameters:
+        logger: Logger for printing progress info.
+        save_dir (str): Directory to save the images.
+        overwrite (bool): If True, redownload all even if they exist.
+    """
+    os.makedirs(save_dir, exist_ok=True)
+
+    dataset_repo = "billzhao1030/MP3D_marked_obs"
+
+    # Load scan IDs
+    scan_ids = load_hub_data("billzhao1030/MP3D", "scans.txt", extension="txt")
+
+    directions = ["left", "front", "right", "back"]
+
+    for scan_id in tqdm(scan_ids, desc="Processing scans"):
+        logger.info(f"\n⬇️  Downloading marked obs split: {scan_id}")
+        scan_dataset = load_dataset(dataset_repo, split=scan_id, streaming=True)
+
+        for item in tqdm(scan_dataset, desc=f"Downloading {scan_id}", leave=False):
+            viewpoint_id = item["viewpoint_id"]
+
+            for direction in directions:
+                img = item[direction]
+                filename = f"{scan_id}_{viewpoint_id}_{direction}.png"
+                save_path = os.path.join(save_dir, filename)
+
+                if not overwrite and os.path.exists(save_path):
+                    continue
+
+                img.save(save_path)
+
+        logger.info(f"✅ Finished scan {scan_id}.\n")
+
+    logger.info("🏁 All marked observation scans downloaded.")
+
+
 @dataclass
 class AgentAction:
     """A full description of an action for an ActionAgent to execute."""
