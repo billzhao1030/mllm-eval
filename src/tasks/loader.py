@@ -4,10 +4,6 @@ import json
 from logging import Logger
 from omegaconf import DictConfig
 import torch
-# import torch.distributed as dist
-# from torch.utils.data.distributed import DistributedSampler
-# from torch.utils.data import DataLoader, SequentialSampler
-# from typing import List, Dict, Tuple, Union
 
 from utils.data import load_hub_data, load_graph
 from .feature_db import create_observation_db
@@ -69,96 +65,4 @@ def create_val_env(
             env_name = f"{task}.{split}"
             val_envs[env_name] = dataset
 
-            # task_loader, pre_epoch = build_dataloader(
-            #      dataset=dataset,
-            #      distributed=config.distributed.distributed,
-            #      batch_size=config.experiment.batch_size,
-            #      num_workers=config.experiment.workers
-            # )
-
-            # dataloader_name = f"{task}.{split}"
-            # dataloaders[dataloader_name] = PrefetchLoader(task_loader, device=device)
-
     return val_envs
-
-# def build_dataloader(dataset, distributed, batch_size, num_workers):
-#     if distributed:
-#         size = dist.get_world_size()
-#         sampler = DistributedSampler(
-#             dataset, num_replicas=size, rank=dist.get_rank(), shuffle=False
-#         )
-#         pre_epoch = sampler.set_epoch
-#     else:
-#         sampler = SequentialSampler(dataset)
-
-#         size = torch.cuda.device_count() if torch.cuda.is_available() else 1
-#         pre_epoch = lambda e: None
-
-#     loader = DataLoader(
-#         dataset,
-#         sampler=sampler,
-#         batch_size=batch_size,
-#         num_workers=num_workers,
-#         pin_memory=True,
-#         drop_last=False,
-#         collate_fn=dataset.collate_batch,
-#     )
-#     loader.num_batches = len(loader)
-
-#     return loader, pre_epoch
-
-# def move_to_cuda(batch: Union[List, Tuple, Dict, torch.Tensor], device: torch.device):
-#     if isinstance(batch, torch.Tensor):
-#         return batch.to(device, non_blocking=True)
-#     elif isinstance(batch, list):
-#         return [move_to_cuda(t, device) for t in batch]
-#     elif isinstance(batch, tuple):
-#         return tuple(move_to_cuda(t, device) for t in batch)
-#     elif isinstance(batch, dict):
-#         return {n: move_to_cuda(t, device) for n, t in batch.items()}
-#     return batch
-
-
-# class PrefetchLoader(object):
-#     def __init__(self, loader, device: torch.device):
-#         self.loader = loader
-#         self.device = device
-#         self.num_batches = self.loader.num_batches
-
-#     def get_dataset(self):
-#         return self.loader.dataset
-
-#     def __iter__(self):
-#         loader_it = iter(self.loader)
-#         self.preload(loader_it)
-#         batch = self.next(loader_it)
-#         while batch is not None:
-#             yield batch
-#             batch = self.next(loader_it)
-
-#     def __len__(self):
-#         return len(self.loader)
-
-#     def preload(self, it):
-#         try:
-#             self.batch = next(it)
-#         except StopIteration:
-#             self.batch = None
-#             return
-#         self.batch = move_to_cuda(self.batch, self.device)
-
-#     def next(self, it):
-#         batch = self.batch
-#         self.preload(it)
-#         return batch
-
-#     def __getattr__(self, name):
-#         method = self.loader.__getattribute__(name)
-#         return method 
-          
-
-    
-
-
-    
-
