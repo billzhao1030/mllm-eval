@@ -1,7 +1,9 @@
 """Agent that interacts with Matterport3D simulator via a hierarchical planning approach."""
 
 import re
+import numpy as np
 from agent_base import BaseAgent
+from tasks.mp3d_dataset import MP3DDataset
 from models import get_models
 from typing import List
 
@@ -77,4 +79,56 @@ class NavAgent(BaseAgent):
         
     def get_history(self, obs, angle) -> str:
         pass
+
+    def init_trajectory(self, obs: List[dict]):
+        """Initialize the trajectory with the given observation."""
+        # Record the navigation path
+        self.traj = [{
+            'instr_id': ob['instr_id'],
+            'path': [[ob['viewpoint']]],
+            'llm_outputs': [],
+            'details': [],
+        } for ob in obs]
+        # Record the history of actions taken
+        self.history = [f'Navigation start, no actions taken yet.\nCurrent viewpoint "{obs[0]["viewpoint"]}": Scene from the viewpoint is a {obs[0]["obs_summary"]}']
+
+        print(f"\nExcuating instruction:\n{obs[0]['instr_id']}: {obs[0]['instruction']}")
+
+    def rollout(self, reset=True):
+        if reset: # Reset env
+            obs = self.env.reset()
+        else:
+            obs = self.env._get_obs()
+
+        # Initialize the trajectory
+        self.init_trajectory(obs)
+
+        # Load the instruction
+        instructions = [ob['instruction'] for ob in obs]
+
+        self.traj[0]['instruction'] = instructions[0]
+
+        # Rollout
+        step = 0
+        while step < self.config.experiment.max_step:
+            for i, ob in enumerate(obs):
+                instruction = instructions[i]
+                image_obs = ob['img_obs']
+                marker_caption = ob['caption']
+
+                map = ob['map']
+
+                heading = np.rad2deg(ob['heading'])
+                elevation = np.rad2deg(ob['elevation'])
+
+            input = {
+                "instruction": instruction,
+                "caption": marker_caption,
+                "map": map,
+                "heading": heading,
+                "elevation": elevation,
+                "history": self.history,
+                "candidate": ob
+            }
+
 

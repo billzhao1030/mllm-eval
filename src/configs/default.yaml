@@ -12,6 +12,7 @@ experiment:
   no_backtrack: false          # Disable backtracking
   detailed_output: false       # Enable detailed output
   model: None
+  max_step: 30
 
   # Checkpoint Configuration
   resume_file: null            # Path to resume a trained model

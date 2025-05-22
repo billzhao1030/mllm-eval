@@ -69,20 +69,12 @@ class ImageObservationDB(object):
         if (normalized_heading >= 315 and normalized_heading < 360) or \
         (normalized_heading >= 0 and normalized_heading < 45):
             current_front_key = 'front'
-            global_front_deg = 0
         elif normalized_heading >= 45 and normalized_heading < 135:
             current_front_key = 'right'
-            global_front_deg = 90
         elif normalized_heading >= 135 and normalized_heading < 225:
             current_front_key = 'back'
-            global_front_deg = 180
         elif normalized_heading >= 225 and normalized_heading < 315:
             current_front_key = 'left'
-            global_front_deg = 270
-        else:
-            current_front_key = 'front'
-            global_front_deg = 0
-            print(f"Warning: Could not determine current front based on heading {heading_deg}. Defaulting to 'front'.")
 
         global_order_keys = ['left', 'front', 'right', 'back']
         idx_current_front = global_order_keys.index(current_front_key)

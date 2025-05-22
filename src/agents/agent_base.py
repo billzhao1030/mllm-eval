@@ -1,11 +1,12 @@
 import os
 import json
 
+from tasks.mp3d_dataset import MP3DDataset
 
 class BaseAgent(object):
     ''' Base class for an agent to generate and save trajectories. '''
 
-    def __init__(self, env):
+    def __init__(self, env: MP3DDataset):
         self.env = env
         self.results = {}
 

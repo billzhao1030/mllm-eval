@@ -171,34 +171,4 @@ class MP3DDataset(BaseDataset):
         ''' Takes action in the environments (same interface as makeActions). '''
         self.env.makeActions(next_viewpoint_IDs)
         return self._get_obs()
-    
-
-    
-
-    # @staticmethod
-    # def collate_batch(
-    #     batch_list: List[Dict],
-    #     _unused: bool = False,
-    # ) -> Dict:
-    #     # batch list is a list of dictionaries from __getitem__
-    #     data_dict = defaultdict(list)
-
-    #     # collate the data dictionaries from the batch list into a single dictionary
-    #     for cur_sample in batch_list:
-    #         for key, val in cur_sample.items():
-    #             data_dict[key].append(val)
-    #     batch_size = len(batch_list)
-    #     ret = {}
-    #     for key, val in data_dict.items():
-    #         try:
-    #             if key in ['NotImplemented']:
-    #                 ret[key] = torch.stack(val, 0)
-    #             else:
-    #                 ret[key] = val
-    #         except:
-    #             print('Error in collate_batch: key=%s' % key)
-    #             raise TypeError
-
-    #     ret['batch_size'] = batch_size
-    #     return ret
             
