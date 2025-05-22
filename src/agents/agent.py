@@ -3,7 +3,9 @@
 import re
 import numpy as np
 from agent_base import BaseAgent
+from models.base_mllm import BaseMLLM
 from tasks.mp3d_dataset import MP3DDataset
+from prompt import PROMPT
 from models import get_models
 from typing import List
 
@@ -31,7 +33,7 @@ class NavAgent(BaseAgent):
         self.config = config
         self.logger = logger
 
-        self.model = get_models(config.experiment.model)
+        self.model: BaseMLLM = get_models(config.experiment.model)
 
         self.history: List[str] = None
 
@@ -128,7 +130,33 @@ class NavAgent(BaseAgent):
                 "heading": heading,
                 "elevation": elevation,
                 "history": self.history,
-                "candidate": ob
+                "candidate": ob['candidate']
             }
 
+            # Model Inference
+            output = self.model(prompt=PROMPT, input=input)
+            self.traj[0]['llm_output'].append(output)
 
+            # Parse LLMs output
+            try:
+                action = self.parse(output)
+            except OutputParserException as e:
+                observation = str(e.observation)
+                text = str(e.llm_output)
+
+                action = AgentAction("_Exception", observation, text)
+
+            # If the tool chosen is the finishing tool, then we end and return.
+            if isinstance(action, AgentFinish):
+                self.logger.info(f"\nStep {step}:\nLLM output: {action.log}\nAction: Finished!")
+
+            if isinstance(action, AgentAction):
+                # Make action
+                obs = self.make_action(action)
+                print(f"\nStep {step}:\nLLM output: {action.log}\nAction: {self.history[-1]}")
+
+            # Update history
+            self.traj[0]['history'] = self.history
+            step += 1
+
+        return self.traj

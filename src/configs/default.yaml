@@ -40,7 +40,8 @@ agent:
 
 # MP3D Environment
 environment:
-  obs_dir: "../datasets/observations/"
+  obs_dir: "../data/marked_obs/"
+  caption_dir: "../data/MP3D/GPT-4o_caption.json"
   obs_sum_dir: null
   map_dir: null
 

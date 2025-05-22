@@ -32,7 +32,8 @@ class ImageObservationDB(object):
             'img_obs': {}, 
             'caption': {}, 
             'summary': None, 
-            'map': None
+            'map': None,
+            'id_viewpoint': self.map_caption_indices_to_viewpoints(scan, viewpoint)
         }
         
         # Load image observation
@@ -59,6 +60,21 @@ class ImageObservationDB(object):
             pass
 
         return self._obs_store[key]
+
+    def map_caption_indices_to_viewpoints(self, scan_id, viewpoint_id):
+        with open("../data/MP3D/navigable.json", 'r') as f:
+            navigable = json.load(f)
+
+        # Get the dictionary of navigable viewpoints for the given scan and viewpoint
+        navigable_points = navigable.get(scan_id, {}).get(viewpoint_id, {})
+
+        # Map caption indices to viewpoint IDs based on order
+        caption_id_to_viewpoint = {
+            str(i + 1): vp_id
+            for i, vp_id in enumerate(navigable_points.keys())
+        }
+
+        return caption_id_to_viewpoint
     
     def display_four_images_with_heading(img_obs, heading_deg=0):
         # Normalize heading to be within 0 to 359 degrees
@@ -114,10 +130,16 @@ class ImageObservationDB(object):
 
 def create_observation_db(config, logger):
     img_obs_dir = config.environment.obs_dir
+    caption_dir = config.environment.caption_dir
     img_obs_sum_dir = config.environment.obs_sum_dir
     map_dir = config.environment.map_dir
 
     # download_mp3d_observations(logger)
 
-    return ImageObservationDB(img_obs_dir, img_obs_sum_dir, map_dir)
+    return ImageObservationDB(
+        img_obs_dir, 
+        caption_dir,
+        img_obs_sum_dir, 
+        map_dir
+    )
 

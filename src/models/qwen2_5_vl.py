@@ -36,7 +36,8 @@ class Qwen2_5_VL(BaseMLLM):
             self.processor = AutoProcessor.from_pretrained(model_name)
             self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
                 model_name,
-                torch_dtype=torch.float16,
+                torch_dtype=torch.bfloat16,
+                attn_implementation="flash_attention_2",
                 device_map="auto"
             ).to(self.device)
             self.model.eval() # Set model to evaluation mode
