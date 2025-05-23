@@ -37,7 +37,7 @@ class NavAgent(BaseAgent):
 
         self.history: List[str] = None
 
-    def parse(self, text: str):
+    def parse(self, text: str, id_viewpoint: dict):
         final_answer = FINAL_ANSWER_ACTION in text
 
         regex = (r"(?<=Answer:\s)(-?\d+(\.\d+)?)")
@@ -46,9 +46,9 @@ class NavAgent(BaseAgent):
 
         if action_match:
             action = "make_action"
-            tool_input = action_match.group().strip()
+            tool_input = id_viewpoint[action_match.group().strip()]
 
-            if self.config.experiment.action_space == 'viewpoint' and tool_input not in self.env.env.sims[0].navigable.keys():
+            if tool_input not in self.env.env.sims[0].navigable.keys():
                 raise OutputParserException(
                     f"Could not make corresponding action: `{text}`",
                     observation=VIEWPOINT_NOT_IN_NAVIGABLE_ERROR_MESSAGE,
@@ -56,7 +56,7 @@ class NavAgent(BaseAgent):
                     send_to_llm=True,
                 )
             
-            return AgentAction(action, tool_input, text)
+            return AgentAction(action, action_match.group().strip(), text)
         elif final_answer:
             return AgentFinish(
                 {"output": text.split(FINAL_ANSWER_ACTION)[-1].strip()}, text
@@ -80,7 +80,8 @@ class NavAgent(BaseAgent):
             raise OutputParserException(f"Could not parse LLM output: `{text}`")
         
     def get_history(self, obs, angle) -> str:
-        pass
+        """Return the history of actions taken."""
+        
 
     def init_trajectory(self, obs: List[dict]):
         """Initialize the trajectory with the given observation."""
@@ -95,6 +96,73 @@ class NavAgent(BaseAgent):
         self.history = [f'Navigation start, no actions taken yet.\nCurrent viewpoint "{obs[0]["viewpoint"]}": Scene from the viewpoint is a {obs[0]["obs_summary"]}']
 
         print(f"\nExcuating instruction:\n{obs[0]['instr_id']}: {obs[0]['instruction']}")
+
+    def make_equiv_action(self, actions: List[dict]) -> str:
+        def normalize_angle(angle):
+            while angle > 180:
+                angle -= 360
+            while angle <= -180:
+                angle += 360
+            return angle
+        
+        def angle_to_left_right(angle):
+            return f"left {-angle:.2f}" if angle < 0 else f"right {angle:.2f}"
+
+        # Get current agent facing angle
+        cur_obs = self.env._get_obs()[0]
+        cur_heading = np.rad2deg(cur_obs['heading'])
+
+        # Get the target viewpoint ID
+        target = actions
+
+        # Make the action
+        new_obs = self.env.step(target)[0]
+        new_heading = np.rad2deg(new_obs['heading'])
+
+        # Record the trajectory
+        scan = cur_obs['scan']
+        shortest_paths = self.env.environment['shortest_path'][scan]
+
+        self.traj[0]['path'].append(shortest_paths[cur_obs['viewpoint']][target[0]][1:])
+
+        # Calculate the turned angle
+        turned_angle = new_heading - cur_heading
+
+        # Generate action description
+        cur_heading = angle_to_left_right(normalize_angle(cur_heading))
+        new_heading = angle_to_left_right(normalize_angle(new_heading))
+        action_description = f'Turn heading direction {turned_angle:.2f} degrees from {cur_heading} to {new_heading}.'
+
+        return action_description, new_obs
+
+    def make_action(self, action: AgentAction, id_viewpoint) -> str:
+        """Make single action in Simulator"""
+        if action.tool == 'make_action':
+            # Extract viewpoint ID
+            tool_input = id_viewpoint[action.tool_input]
+            target = tool_input.strip(" ").strip('"').strip("'")
+            # Make action
+            turned_angle, new_obs = self.make_equiv_action([target])
+            # Update history
+            history = self.get_history(new_obs, turned_angle)
+        else:
+            # For non-valid actions
+            history = action.tool_input # Error observation message
+            turned_angle = None
+            new_obs = self.env._get_obs()[0]
+
+        self.history.append(history)
+
+        detail = {
+            "viewpointID": action.tool_input,
+            "turned_angle": turned_angle,
+            "summary": new_obs["summary"], # TODO, check this if needed
+            "history": self.history[-1],
+        }
+        self.traj[0]['details'].append(detail)
+
+        return [new_obs]
+
 
     def rollout(self, reset=True):
         if reset: # Reset env
@@ -115,7 +183,7 @@ class NavAgent(BaseAgent):
         while step < self.config.experiment.max_step:
             for i, ob in enumerate(obs):
                 instruction = instructions[i]
-                image_obs = ob['img_obs']
+                image_obs = ob['img_obs']['egocentirc'] # Single egocentric plot
                 marker_caption = ob['caption']
 
                 map = ob['map']
@@ -130,7 +198,8 @@ class NavAgent(BaseAgent):
                 "heading": heading,
                 "elevation": elevation,
                 "history": self.history,
-                "candidate": ob['candidate']
+                "candidate": ob['candidate'],
+                'image': image_obs
             }
 
             # Model Inference
@@ -139,7 +208,7 @@ class NavAgent(BaseAgent):
 
             # Parse LLMs output
             try:
-                action = self.parse(output)
+                action = self.parse(output, ob['id_viewpoint'])
             except OutputParserException as e:
                 observation = str(e.observation)
                 text = str(e.llm_output)
@@ -152,7 +221,7 @@ class NavAgent(BaseAgent):
 
             if isinstance(action, AgentAction):
                 # Make action
-                obs = self.make_action(action)
+                obs = self.make_action(action, ob['id_viewpoint'])
                 print(f"\nStep {step}:\nLLM output: {action.log}\nAction: {self.history[-1]}")
 
             # Update history

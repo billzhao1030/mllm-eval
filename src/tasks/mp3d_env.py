@@ -1,4 +1,5 @@
 import math
+import numpy as np
 from utils.graph import NavGraph
 
 ERROR_MARGIN = 3.0
@@ -122,7 +123,9 @@ class EnvBatch(object):
         for _, sim in enumerate(self.sims):
             state = sim.getState()
 
-            feature = self.obs_db.get_image_observation(state["scanID"], state["viewpointID"])
+            heading = np.rad2deg(state['heading'])
+
+            feature = self.obs_db.get_image_observation(state["scanID"], state["viewpointID"], heading)
             feature_states.append((feature, state))
         return feature_states
 

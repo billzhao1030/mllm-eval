@@ -22,7 +22,7 @@ class ImageObservationDB(object):
 
         self.directions = ["left", "front", "right", "back"]
 
-    def get_image_observation(self, scan, viewpoint):
+    def get_image_observation(self, scan, viewpoint, heading):
         key = "%s_%s" % (scan, viewpoint)
         if key in self._obs_store:
             return self._obs_store[key]
@@ -44,6 +44,11 @@ class ImageObservationDB(object):
                 raise FileNotFoundError(f"Missing image: {image_path}")
             image = Image.open(image_path).convert('RGB')
             self._obs_store[key]['img_obs'][direction] = image
+
+        img_obs = self._obs_store[key]['img_obs']
+
+
+        self._obs_store[key]['img_obs']['egocentric'] = self.display_four_images_with_heading(img_obs, heading)
 
         # Load the caption of the markers
         with open(self.marker_caption_dir, 'r') as f:
@@ -76,7 +81,7 @@ class ImageObservationDB(object):
 
         return caption_id_to_viewpoint
     
-    def display_four_images_with_heading(img_obs, heading_deg=0):
+    def display_four_images_with_heading(self, img_obs, heading_deg=0):
         # Normalize heading to be within 0 to 359 degrees
         normalized_heading = heading_deg % 360
         if normalized_heading < 0:
