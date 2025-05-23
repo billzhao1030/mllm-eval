@@ -1,0 +1,308 @@
+[
+    {
+        "sample_id": "6250_0_0",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] Walk down one flight of stairs and stop on the landing.\n\n[History] Navigation starts.\n\n[Action options] {\n  \"Front\": {\n    \"2\": \"Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\"\n  },\n  \"Left\": {\n    \"1\": \"Doorway with ornate wood paneling; leads toward a smaller, enclosed room or corridor.\"\n  },\n  \"Right\": {},\n  \"Back\": {},\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 2. Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step0.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_0_1",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] Walk between the columns and make a sharp turn right. Walk down the steps and stop on the landing.\n\n[History] Navigation starts.\n\n[Action options] {\n  \"Front\": {\n    \"2\": \"Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\"\n  },\n  \"Left\": {\n    \"1\": \"Doorway with ornate wood paneling; leads toward a smaller, enclosed room or corridor.\"\n  },\n  \"Right\": {},\n  \"Back\": {},\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 2. Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step0.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_0_2",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] walk forward then turn right at the stairs then go down the stairs.\n\n[History] Navigation starts.\n\n[Action options] {\n  \"Front\": {\n    \"2\": \"Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\"\n  },\n  \"Left\": {\n    \"1\": \"Doorway with ornate wood paneling; leads toward a smaller, enclosed room or corridor.\"\n  },\n  \"Right\": {},\n  \"Back\": {},\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 2. Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step0.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_1_0",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] Walk down one flight of stairs and stop on the landing.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\n\n[Action options] {\n  \"Front\": {\n    \"3\": \"Room with large windows and chandeliers; leads to a formal seating or dining area.\",\n    \"4\": \"Room with ornate furniture and chandeliers; leads to a luxurious meeting or dining space.\"\n  },\n  \"Left\": {\n    \"2\": \"Narrow hallway with red carpet; leads toward a statue at the end of the corridor.\"\n  },\n  \"Right\": {\n    \"5\": \"Wide hallway with red carpet and seating; leads toward an adjacent corridor or room.\",\n    \"6\": \"Doorway with red carpet; leads to a connecting room or hallway.\",\n    \"7\": \"Ornate wall and furniture; leads toward a decorative interior space.\",\n    \"8\": \"Corner with a decorative console table; leads to a side area or adjacent room.\"\n  },\n  \"Back\": {\n    \"1\": \"Grand chandelier and ornate ceiling; leads toward a central rotunda or main hall.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 8. Corner with a decorative console table; leads to a side area or adjacent room."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step1.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_1_1",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] Walk between the columns and make a sharp turn right. Walk down the steps and stop on the landing.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\n\n[Action options] {\n  \"Front\": {\n    \"3\": \"Room with large windows and chandeliers; leads to a formal seating or dining area.\",\n    \"4\": \"Room with ornate furniture and chandeliers; leads to a luxurious meeting or dining space.\"\n  },\n  \"Left\": {\n    \"2\": \"Narrow hallway with red carpet; leads toward a statue at the end of the corridor.\"\n  },\n  \"Right\": {\n    \"5\": \"Wide hallway with red carpet and seating; leads toward an adjacent corridor or room.\",\n    \"6\": \"Doorway with red carpet; leads to a connecting room or hallway.\",\n    \"7\": \"Ornate wall and furniture; leads toward a decorative interior space.\",\n    \"8\": \"Corner with a decorative console table; leads to a side area or adjacent room.\"\n  },\n  \"Back\": {\n    \"1\": \"Grand chandelier and ornate ceiling; leads toward a central rotunda or main hall.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 8. Corner with a decorative console table; leads to a side area or adjacent room."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step1.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_1_2",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] walk forward then turn right at the stairs then go down the stairs.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\n\n[Action options] {\n  \"Front\": {\n    \"3\": \"Room with large windows and chandeliers; leads to a formal seating or dining area.\",\n    \"4\": \"Room with ornate furniture and chandeliers; leads to a luxurious meeting or dining space.\"\n  },\n  \"Left\": {\n    \"2\": \"Narrow hallway with red carpet; leads toward a statue at the end of the corridor.\"\n  },\n  \"Right\": {\n    \"5\": \"Wide hallway with red carpet and seating; leads toward an adjacent corridor or room.\",\n    \"6\": \"Doorway with red carpet; leads to a connecting room or hallway.\",\n    \"7\": \"Ornate wall and furniture; leads toward a decorative interior space.\",\n    \"8\": \"Corner with a decorative console table; leads to a side area or adjacent room.\"\n  },\n  \"Back\": {\n    \"1\": \"Grand chandelier and ornate ceiling; leads toward a central rotunda or main hall.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 8. Corner with a decorative console table; leads to a side area or adjacent room."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step1.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_2_0",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] Walk down one flight of stairs and stop on the landing.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\nStep 2: Turn 40.56 degrees and forward 0.18 meters towards Corner with a decorative console table; leads to a side area or adjacent room.\n\n[Action options] {\n  \"Front\": {},\n  \"Left\": {\n    \"3\": \"Luxurious sitting room with a chandelier, red carpet, and ornate furniture; leads to a formal gathering space.\",\n    \"4\": \"Doorway with detailed woodwork and red carpet; leads to a smaller, possibly private room.\"\n  },\n  \"Right\": {\n    \"1\": \"Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area.\"\n  },\n  \"Back\": {\n    \"2\": \"Doorway framed by intricate molding and columns; leads to an adjacent room with similar decor.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 1. Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step2.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_2_1",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] Walk between the columns and make a sharp turn right. Walk down the steps and stop on the landing.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\nStep 2: Turn 40.56 degrees and forward 0.18 meters towards Corner with a decorative console table; leads to a side area or adjacent room.\n\n[Action options] {\n  \"Front\": {},\n  \"Left\": {\n    \"3\": \"Luxurious sitting room with a chandelier, red carpet, and ornate furniture; leads to a formal gathering space.\",\n    \"4\": \"Doorway with detailed woodwork and red carpet; leads to a smaller, possibly private room.\"\n  },\n  \"Right\": {\n    \"1\": \"Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area.\"\n  },\n  \"Back\": {\n    \"2\": \"Doorway framed by intricate molding and columns; leads to an adjacent room with similar decor.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 1. Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step2.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_2_2",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] walk forward then turn right at the stairs then go down the stairs.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\nStep 2: Turn 40.56 degrees and forward 0.18 meters towards Corner with a decorative console table; leads to a side area or adjacent room.\n\n[Action options] {\n  \"Front\": {},\n  \"Left\": {\n    \"3\": \"Luxurious sitting room with a chandelier, red carpet, and ornate furniture; leads to a formal gathering space.\",\n    \"4\": \"Doorway with detailed woodwork and red carpet; leads to a smaller, possibly private room.\"\n  },\n  \"Right\": {\n    \"1\": \"Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area.\"\n  },\n  \"Back\": {\n    \"2\": \"Doorway framed by intricate molding and columns; leads to an adjacent room with similar decor.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 1. Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step2.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_3_0",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] Walk down one flight of stairs and stop on the landing.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\nStep 2: Turn 40.56 degrees and forward 0.18 meters towards Corner with a decorative console table; leads to a side area or adjacent room.\nStep 3: Turn -397.19 degrees and forward 0.04 meters towards Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area.\n\n[Action options] {\n  \"Front\": {\n    \"1\": \"Ornate staircase with red carpet; leads downward to a lower level with decorative railings.\"\n  },\n  \"Left\": {},\n  \"Right\": {},\n  \"Back\": {\n    \"2\": \"Grand hallway with red carpet and chandelier; leads toward a room with large windows and intricate ceiling details.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 1. Ornate staircase with red carpet; leads downward to a lower level with decorative railings."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step3.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_3_1",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] Walk between the columns and make a sharp turn right. Walk down the steps and stop on the landing.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\nStep 2: Turn 40.56 degrees and forward 0.18 meters towards Corner with a decorative console table; leads to a side area or adjacent room.\nStep 3: Turn -397.19 degrees and forward 0.04 meters towards Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area.\n\n[Action options] {\n  \"Front\": {\n    \"1\": \"Ornate staircase with red carpet; leads downward to a lower level with decorative railings.\"\n  },\n  \"Left\": {},\n  \"Right\": {},\n  \"Back\": {\n    \"2\": \"Grand hallway with red carpet and chandelier; leads toward a room with large windows and intricate ceiling details.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 1. Ornate staircase with red carpet; leads downward to a lower level with decorative railings."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step3.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_3_2",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] walk forward then turn right at the stairs then go down the stairs.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\nStep 2: Turn 40.56 degrees and forward 0.18 meters towards Corner with a decorative console table; leads to a side area or adjacent room.\nStep 3: Turn -397.19 degrees and forward 0.04 meters towards Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area.\n\n[Action options] {\n  \"Front\": {\n    \"1\": \"Ornate staircase with red carpet; leads downward to a lower level with decorative railings.\"\n  },\n  \"Left\": {},\n  \"Right\": {},\n  \"Back\": {\n    \"2\": \"Grand hallway with red carpet and chandelier; leads toward a room with large windows and intricate ceiling details.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 1. Ornate staircase with red carpet; leads downward to a lower level with decorative railings."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step3.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_4_0",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] Walk down one flight of stairs and stop on the landing.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\nStep 2: Turn 40.56 degrees and forward 0.18 meters towards Corner with a decorative console table; leads to a side area or adjacent room.\nStep 3: Turn -397.19 degrees and forward 0.04 meters towards Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area.\nStep 4: Turn -3.97 degrees and forward 0.09 meters towards Ornate staircase with red carpet; leads downward to a lower level with decorative railings.\n\n[Action options] {\n  \"Front\": {\n    \"1\": \"Front view with ornate railing and red carpet; leads toward a lower level or central staircase.\"\n  },\n  \"Left\": {},\n  \"Right\": {},\n  \"Back\": {\n    \"2\": \"Back view with red-carpeted stairs and arched windows; leads toward an upper level or balcony area.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 1. Front view with ornate railing and red carpet; leads toward a lower level or central staircase."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step4.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_4_1",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] Walk between the columns and make a sharp turn right. Walk down the steps and stop on the landing.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\nStep 2: Turn 40.56 degrees and forward 0.18 meters towards Corner with a decorative console table; leads to a side area or adjacent room.\nStep 3: Turn -397.19 degrees and forward 0.04 meters towards Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area.\nStep 4: Turn -3.97 degrees and forward 0.09 meters towards Ornate staircase with red carpet; leads downward to a lower level with decorative railings.\n\n[Action options] {\n  \"Front\": {\n    \"1\": \"Front view with ornate railing and red carpet; leads toward a lower level or central staircase.\"\n  },\n  \"Left\": {},\n  \"Right\": {},\n  \"Back\": {\n    \"2\": \"Back view with red-carpeted stairs and arched windows; leads toward an upper level or balcony area.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 1. Front view with ornate railing and red carpet; leads toward a lower level or central staircase."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step4.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_4_2",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] walk forward then turn right at the stairs then go down the stairs.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\nStep 2: Turn 40.56 degrees and forward 0.18 meters towards Corner with a decorative console table; leads to a side area or adjacent room.\nStep 3: Turn -397.19 degrees and forward 0.04 meters towards Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area.\nStep 4: Turn -3.97 degrees and forward 0.09 meters towards Ornate staircase with red carpet; leads downward to a lower level with decorative railings.\n\n[Action options] {\n  \"Front\": {\n    \"1\": \"Front view with ornate railing and red carpet; leads toward a lower level or central staircase.\"\n  },\n  \"Left\": {},\n  \"Right\": {},\n  \"Back\": {\n    \"2\": \"Back view with red-carpeted stairs and arched windows; leads toward an upper level or balcony area.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: 1. Front view with ornate railing and red carpet; leads toward a lower level or central staircase."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step4.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_5_0",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] Walk down one flight of stairs and stop on the landing.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\nStep 2: Turn 40.56 degrees and forward 0.18 meters towards Corner with a decorative console table; leads to a side area or adjacent room.\nStep 3: Turn -397.19 degrees and forward 0.04 meters towards Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area.\nStep 4: Turn -3.97 degrees and forward 0.09 meters towards Ornate staircase with red carpet; leads downward to a lower level with decorative railings.\nStep 5: Turn 8.74 degrees and forward 0.26 meters towards Front view with ornate railing and red carpet; leads toward a lower level or central staircase.\n\n[Action options] {\n  \"Front\": {},\n  \"Left\": {},\n  \"Right\": {\n    \"1\": \"Ornate railing and curved staircase; leads toward the lower level of the staircase.\",\n    \"2\": \"Continuation of the staircase with intricate carpet design; leads further down the stairs.\"\n  },\n  \"Back\": {\n    \"3\": \"Grand staircase with red carpet and chandelier; leads toward the upper level or main hall.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: Stop."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step5.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_5_1",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] Walk between the columns and make a sharp turn right. Walk down the steps and stop on the landing.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\nStep 2: Turn 40.56 degrees and forward 0.18 meters towards Corner with a decorative console table; leads to a side area or adjacent room.\nStep 3: Turn -397.19 degrees and forward 0.04 meters towards Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area.\nStep 4: Turn -3.97 degrees and forward 0.09 meters towards Ornate staircase with red carpet; leads downward to a lower level with decorative railings.\nStep 5: Turn 8.74 degrees and forward 0.26 meters towards Front view with ornate railing and red carpet; leads toward a lower level or central staircase.\n\n[Action options] {\n  \"Front\": {},\n  \"Left\": {},\n  \"Right\": {\n    \"1\": \"Ornate railing and curved staircase; leads toward the lower level of the staircase.\",\n    \"2\": \"Continuation of the staircase with intricate carpet design; leads further down the stairs.\"\n  },\n  \"Back\": {\n    \"3\": \"Grand staircase with red carpet and chandelier; leads toward the upper level or main hall.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: Stop."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step5.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    },
+    {
+        "sample_id": "6250_5_2",
+        "messages": [
+            {
+                "role": "user",
+                "content": "[Observation] <image>\n\n[Instruction] walk forward then turn right at the stairs then go down the stairs.\n\n[History] Navigation starts.\nStep 1: Turn -37.73 degrees and forward 0.09 meters towards Open lounge area with chandeliers and seating; leads toward a grand, well-lit room with large windows.\nStep 2: Turn 40.56 degrees and forward 0.18 meters towards Corner with a decorative console table; leads to a side area or adjacent room.\nStep 3: Turn -397.19 degrees and forward 0.04 meters towards Balcony overlooking a grand hall with a red carpet and ornate chandelier; leads toward the lower seating area.\nStep 4: Turn -3.97 degrees and forward 0.09 meters towards Ornate staircase with red carpet; leads downward to a lower level with decorative railings.\nStep 5: Turn 8.74 degrees and forward 0.26 meters towards Front view with ornate railing and red carpet; leads toward a lower level or central staircase.\n\n[Action options] {\n  \"Front\": {},\n  \"Left\": {},\n  \"Right\": {\n    \"1\": \"Ornate railing and curved staircase; leads toward the lower level of the staircase.\",\n    \"2\": \"Continuation of the staircase with intricate carpet design; leads further down the stairs.\"\n  },\n  \"Back\": {\n    \"3\": \"Grand staircase with red carpet and chandelier; leads toward the upper level or main hall.\"\n  },\n  \"Stop\": \"Have reach the destination and stop here.\"\n}"
+            },
+            {
+                "role": "assistant",
+                "content": "Action: Stop."
+            }
+        ],
+        "images": [
+            "obs_pano/6250_step5.png"
+        ],
+        "system": "[Task background]\nYou are a Vision-Language Navigation (VLN) agent that navigates in an indoor environment. You are required to make sequential decisions according to the observation of the environment to follow the given instruction.\n\n[Input Definitions]\n'Observation': a panoramic image of the current viewpoint, divided into four views: left, front, right, and back. The image is annotated with distinct markers of green circles (indexed in number) as the options for the next step.\n'Instruction' is a global, step-by-step detailed guidance, but you might have already executed some of the commands. You need to carefully discern the commands that have not been executed yet.\n'History' represents the places you have explored in previous steps along with their corresponding descriptions. It may include the correct landmarks mentioned in the 'Instruction' as well as some past erroneous explorations.\n'Action options' are the possible actions you can take at the current step. You can choose to stop if you believe you have reached your destination.\n\n[Output Requirements]\nYou need to align 'Instruction' with 'History' to estimate your instruction execution progress and refer to 'Action options' for path planning. Check the view annotated in the visual observation, avoiding repeated exploration from the back view that leads to getting stuck in a loop, unless it is necessary to backtrack to a specific place.\nYour answer must be an option from 'Action options' and should be in the format of \"Action: <Option_ID>. <Option_description>\". At each step, If you think you have arrived destination, you can choose the option 'Stop'.\n"
+    }
+]
