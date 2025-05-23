@@ -30,7 +30,8 @@ class ImageObservationDB(object):
         # Initialize the key entry once
         self._obs_store[key] = {
             'img_obs': {}, 
-            'caption': {}, 
+            'caption': {},
+            'action_options': None,
             'summary': None, 
             'map': None,
             'id_viewpoint': self.map_caption_indices_to_viewpoints(scan, viewpoint)
@@ -47,12 +48,13 @@ class ImageObservationDB(object):
 
         img_obs = self._obs_store[key]['img_obs']
 
-
         self._obs_store[key]['img_obs']['egocentric'] = self.display_four_images_with_heading(img_obs, heading)
 
         # Load the caption of the markers
         with open(self.marker_caption_dir, 'r') as f:
             self._obs_store[key]['caption'] = json.load(f)[key]
+
+        self._obs_store[key]['action_options'] = self.get_action_options(self._obs_store[key]['caption'], heading)
 
         # Load image observation summary for history if available
         if self.image_obs_sum_dir:
@@ -80,6 +82,9 @@ class ImageObservationDB(object):
         }
 
         return caption_id_to_viewpoint
+    
+    def get_action_options(self, caption, heading):
+        pass
     
     def display_four_images_with_heading(self, img_obs, heading_deg=0):
         # Normalize heading to be within 0 to 359 degrees
@@ -132,6 +137,8 @@ class ImageObservationDB(object):
         # Convert buffer to PIL Image
         img_result = Image.open(buf)
         return img_result
+    
+
 
 def create_observation_db(config, logger):
     img_obs_dir = config.environment.obs_dir

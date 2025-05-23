@@ -1,5 +1,2 @@
-- Check what is AgentFinish and AgentAction
-- Implement make_action
-- Implement make_equiv_action
-- Implement get_history
+- Format the caption into action option prompt
 - Check _construct_input in qwen2_5_vl

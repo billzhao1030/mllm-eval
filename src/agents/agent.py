@@ -95,7 +95,7 @@ class NavAgent(BaseAgent):
         print(f"\nExcuating instruction:\n{obs[0]['instr_id']}: {obs[0]['instruction']}")
 
 
-    def make_equiv_action(self, actions: List[dict]) -> str:
+    def make_equiv_action(self, actions: List[dict], step) -> str:
         def normalize_angle(angle):
             while angle > 180:
                 angle -= 360
@@ -134,15 +134,15 @@ class NavAgent(BaseAgent):
         cur_heading = angle_to_left_right(normalize_angle(cur_heading))
         new_heading = angle_to_left_right(normalize_angle(new_heading))
 
-        action_description = f'Turn heading direction {turned_angle:.2f} degrees from {cur_heading} to {new_heading}, and forward {distance:.2f} meters towards {target_caption}.'
+        action_description = f'\nStep {step}: Turn heading direction {turned_angle:.2f} degrees from {cur_heading} to {new_heading}, and forward {distance:.2f} meters towards {target_caption}.'
 
         return action_description, new_obs
 
-    def make_action(self, action: AgentAction) -> str:
+    def make_action(self, action: AgentAction, step) -> str:
         """Make single action in Simulator"""
         if action.tool == 'make_action':
             # Make action
-            action_description, new_obs = self.make_equiv_action([action.tool_input])
+            action_description, new_obs = self.make_equiv_action([action.tool_input], step)
 
             # Update history
             history = action_description
@@ -222,7 +222,7 @@ class NavAgent(BaseAgent):
 
             if isinstance(action, AgentAction):
                 # Make action
-                obs = self.make_action(action)
+                obs = self.make_action(action, step+1)
                 print(f"\nStep {step}:\nLLM output: {action.log}\nAction: {self.history[-1]}")
 
             # Update history
