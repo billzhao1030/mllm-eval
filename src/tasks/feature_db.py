@@ -1,6 +1,7 @@
 import os
 import io
 import json
+import math
 from PIL import Image
 import matplotlib.pyplot as plt
 
@@ -54,7 +55,13 @@ class ImageObservationDB(object):
         with open(self.marker_caption_dir, 'r') as f:
             self._obs_store[key]['caption'] = json.load(f)[key]
 
-        self._obs_store[key]['action_options'] = self.get_action_options(self._obs_store[key]['caption'], heading)
+        self._obs_store[key]['action_options'] = self.get_action_options(
+            scan, 
+            viewpoint, 
+            self._obs_store[key]['caption'], 
+            self._obs_store[key]['id_viewpoint'],
+            heading
+        )
 
         # Load image observation summary for history if available
         if self.image_obs_sum_dir:
@@ -68,12 +75,12 @@ class ImageObservationDB(object):
 
         return self._obs_store[key]
 
-    def map_caption_indices_to_viewpoints(self, scan_id, viewpoint_id):
+    def map_caption_indices_to_viewpoints(self, scan, viewpoint):
         with open("../data/MP3D/navigable.json", 'r') as f:
             navigable = json.load(f)
 
         # Get the dictionary of navigable viewpoints for the given scan and viewpoint
-        navigable_points = navigable.get(scan_id, {}).get(viewpoint_id, {})
+        navigable_points = navigable.get(scan, {}).get(viewpoint, {})
 
         # Map caption indices to viewpoint IDs based on order
         caption_id_to_viewpoint = {
@@ -83,9 +90,46 @@ class ImageObservationDB(object):
 
         return caption_id_to_viewpoint
     
-    def get_action_options(self, caption, heading):
-        pass
-    
+    def get_action_options(self, scan, viewpoint, caption, id_viewpoint, heading_deg):
+        with open("../data/MP3D/navigable.json", 'r') as f:
+            navigable = json.load(f)
+
+        global_caption = [{}, {}, {}, {}]
+
+        # Convert current heading from radians to degrees and normalize
+        heading_deg = heading_deg % 360
+
+        # Get navigable points for this viewpoint
+        navigable_pts = navigable[scan][viewpoint]
+
+        for marker_id, vp_id in id_viewpoint.items():
+            target_heading = math.degrees(navigable_pts[vp_id]['heading']) % 360
+
+            if 0 <= target_heading < 45 or target_heading >= 315:
+                global_caption[1][marker_id] = caption[marker_id]
+            elif 45 <= target_heading < 135:
+                global_caption[2][marker_id] = caption[marker_id]
+            elif 135 <= target_heading < 225:
+                global_caption[3][marker_id] = caption[marker_id]
+            else:
+                global_caption[0][marker_id] = caption[marker_id]
+
+        # Determine how much to rotate the directional list based on agent heading
+        shift = int(((heading_deg + 45) % 360) // 90)
+
+        # Rotate the list
+        rotated = global_caption[shift:] + global_caption[:shift]
+
+        action_options = {
+            "Left": rotated[0],
+            "Front": rotated[1],
+            "Right": rotated[2],
+            "Back": rotated[3]
+        }
+
+        return action_options
+
+
     def display_four_images_with_heading(self, img_obs, heading_deg=0):
         # Normalize heading to be within 0 to 359 degrees
         normalized_heading = heading_deg % 360

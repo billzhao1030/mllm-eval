@@ -195,6 +195,7 @@ class NavAgent(BaseAgent):
             input = {
                 "instruction": instruction,
                 "caption": marker_caption,
+                "action_options": ob['action_options'],
                 "map": map,
                 "heading": heading,
                 "elevation": elevation,
